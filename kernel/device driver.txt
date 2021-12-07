@@ -1,0 +1,19 @@
+
+# lsmod
+	\\ list currently installed modules and show which other modules depend on the module
+	
+	
+# modinfo
+	\\ query module for dependency & param info
+	
+	
+# insmod
+	\\ install module by path, but does not load driver dependency
+	
+	
+# modprobe
+	\\ install module by name & handle dependency
+	
+
+# rmmod || modprobe -r
+	\\ remove module

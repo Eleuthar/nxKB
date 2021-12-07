@@ -1,0 +1,21 @@
+
+
+-c	  \\ count the number of lines matching PATTERN
+
+-f 	  \\ obtain PATTERN from a file
+
+-i	  \\ ignore case sensitivity
+
+-v	  \\ output all lines except those containing PATTERN
+
+-w	  \\ select lines only if the pattern matches a whole word between \< and \>
+ 
+-n    \\ display matched line number
+
+-v    \\ inverse output, only lines that DO NOT match REGEX
+ 
+ 
+
+~ With GREP, << *+?| >> are treated as characters; ()[]{} must be escaped
+~ EGREP uses the extended regex metacharacter
+~ FGREP = fast grep, interpret string literally with no regex support

@@ -1,0 +1,11 @@
+    -p <PID> 
+       // all files opened by a process
+    
+    <.so> 
+        // shows which processes use a library
+    
+    -u <USER> 
+        # shows which files a user has open
+    
+    -i :80\TCP\UDP 
+        # shows which process uses port 80 OR protocol

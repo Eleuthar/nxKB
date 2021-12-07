@@ -1,0 +1,32 @@
+	1. mkdir ~/kvm-isos and ~/kvm-pool.
+
+	2. Apt-get qemu-kvm, libvirt-bin, virt-manager, and bridge-utils
+
+	3. add user to the libvirt or libvirtd group
+
+	4. su - $USER or logout+login to load group config
+
+	5. virsh -c qemu:///system list to check user permission
+
+	6. Run virt-manager
+
+	7. Change default storage pools volume /var/lib/libvirt/images to ~/kvm-pool, dir: Filesystem Directory type
+
+	8. Browse Local to select ISO and config image.
+
+
+
+brctl show
+	\\ Bridge control lists Ethernet bridges and their status
+
+virsh net-list –all
+	\\ List all virtual networks and their status
+
+virsh list –all
+	\\ List all of your virtual machines [also called domains] and their status
+
+virsh net-info <net3>
+	\\ Get information on a single virtual network
+
+virsh net-dumpxml  <net3>
+	\\ Dump complete information about a virtual network in XML format

@@ -1,0 +1,34 @@
+# split -l 5 /etc/passwd
+	\\ split file into 5 line files with default names: xaa, xab, xac, etc
+	
+
+# split -l 5 /etc/passwd account-
+	\\ split file into 5 line files with default names prefixed with final arg: account-aa, account-ab, etc
+	
+	
+# uniq > /tmp/txt
+	<duplicate lines>
+	\\ file output will return unique lines
+	
+
+# cut -c5-10,15 /etc/passwd
+	\\ output characters 5 to 10, then 15 to end of line, for each line
+	
+	
+# cut -d: -f1,7 --output-delimiter=" " /etc/passwd
+	\\ output fields 1 and 7 delimited with a space, changed from original delimiter ":"
+	
+	
+# fmt
+	\\ text reformatter:
+		-w = number of characters per line
+		-s = split long lines but do not refill
+		-u = place 1 space between words and 2 spaces and end of sentence
+		
+		
+# tr 'A-B' 'a-b' < tzt.txt
+	\\ change uppercase into lowercase; doesn't read from file, only input
+	
+
+# tr ':' '' < /etc/passwd
+	\\ replace delimiter

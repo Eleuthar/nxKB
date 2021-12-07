@@ -1,0 +1,32 @@
+
+    Search & install
+--------------------
+
+// Update package list
+pacman -Syy
+
+// Update and upgrade all (no arg) OR package
+pacman -Syu pkg
+
+// Install specific package
+pacman -S pkg
+
+// Find package
+pacman -Ss pkg
+
+// To remove a package and its dependencies which are not required by any other installed package
+pacman -Rs[c] package_name
+
+
+
+    Query
+---------
+
+// Find available local packages
+pacman -Qs keyword
+
+// List all files from package
+pacman -Ql pkgname
+
+// List all packages no longer required as dependencies
+pacman -Qdt

@@ -1,0 +1,39 @@
+# tar -cvzf backup.tar.gz /home/uzr
+	\\ create gzip compression archive named "backup.tar.gz"
+	
+	
+# tar -xvzf backup.tar.gz
+	\\ extract archive to current directory
+	
+
+# tar -tf backup.tar.gz
+	\\ list archive content without extracting
+	
+	
+# ls/find | cpio -ov > backup.cio
+	\\ archive utility without native compression support, superseded by tar; used in combo with find or ls
+	
+	
+# cpio -iv < backup.cpio
+	\\ extract cpio archive to current directory
+	
+
+# gzip largefile.txt
+	\\ create compressed output file with same name + .gz, less efficient than bzip/bzip2
+		
+	
+# gzip -d largefile.txt.gz
+	OR
+# gunzip largefile.txt.gz
+	\\ decompress
+	
+	
+# bzip2 -[1-9] largefile.txt
+	\\ -1 = create least efficient but fastest compression
+	\\ -9 = create most efficient but slowest compression
+	
+	
+# bzip2 -d largefile.txt.bz2
+	OR
+# bunzip2 largefile.txt.bz2
+	\\ decompress

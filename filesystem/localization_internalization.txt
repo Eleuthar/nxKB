@@ -1,0 +1,29 @@
+
+# date "+The time is: %H Hours and %M Minutes"
+	\\ print formatted date
+	
+
+# date MMDDhhmmCCYY[.ss]
+	\\ change system date
+	
+
+/usr/share/zoneinfo
+	\\ info on all available timezone
+	
+	
+/etc/adjtime
+	\\ correction factor setting
+	
+	
+/etc/localtime
+	\\ zone file in this path provide local system time & ensure day light saving policy
+	
+	
+/etc/ntp.conf
+	\\ remote time server used by NTP daemon to regularly query
+	
+	
+# ntpdate 0.us.pool.ntp.org
+	OR
+# ntpd -q
+	\\ set system time from ntp time server 

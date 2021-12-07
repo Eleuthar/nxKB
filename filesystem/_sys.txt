@@ -1,0 +1,19 @@
+/sys
+	\\ device driver information export
+
+
+/dev
+	\\ device nodes added by udev daemon for user space application to interact with device driver
+	
+	
+/etc/udev/rules.d
+	\\ alternative to defining udev nodes
+	
+	
+ # blkid /dev/hdaX
+	\\ partition UUID & TYPE
+
+	
+ ~ D-Bus (desktop bus) daemon used to handle events such as file browser opening or USB drive inserted. Applications register with D-Bus to receive notifications of events
+ 
+ ~ 

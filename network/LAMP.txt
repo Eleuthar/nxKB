@@ -1,0 +1,26 @@
+
+# yum install php php-mysql php-gd mariadb mariadb-server
+	\\ enable & start php and mariadb
+
+
+# mysql_secure_installations
+
+
+# mysql -u root -p
+MariaDB [(none)]> create database example
+MariaDB [(none)]> create user 'qvq'@'localhost' identified by 'student1';
+MariaDB [(none)]> grant all privileges on example.* to 'qvq'@'localhost'
+MariaDB [(none)]> flush privileges;
+	\\ apply privilege
+
+
+# chown -R apache:apache .	
+	\\ download, extract wordpress to /var/www/example.com & apply ownership
+	
+	
+# cp wp-config-sample.php wp-config.php && vi wp-config.php
+	\\ edit wp-config.php with mariaDB details
+	
+
+# chcon -R -t httpd_sys_content_t .
+	\\ selinux cfg applied to all www wp items

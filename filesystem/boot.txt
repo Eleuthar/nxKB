@@ -1,0 +1,136 @@
+
+FLOW
+~~~~~
+1. CPU jump to BIOS address to load bootloader
+
+2. BIOS check, hardware initialization & boot device locate; hdd superblock holds layout with boot flag partition
+
+3. Load device MBR (first sector = 512 bytes) which contains 1st stage boot loader with partition table
+
+4. 1st stage boot loader loads 2nd stage boot loader. 2nd stage allows flexibility in selecting kernel and OS to boot
+
+4.1 GRUB-ONLY ! 1.5 stage boot loader is located on the first 30 KB of HD and understands ext2\3, reiserfs; it loads 2nd stage 
+
+5. 2nd stage (chainloading) loads kernel and initial ram disk and presents kernel select menu (dual boot) & passes control to loaded kernel
+
+6. kernel configures CPU type, interrupt handling, paging tables, memory paging, device init, drivers etc
+
+7. kernel loads initial RAM disk image (initrd) & mounts as temp root filesystem in RAM
+
+8. initrd contains image of system config files & system hardware modules. Disk drivers are loaded to enable kernel to load the real root partition.
+
+9. startup configured services by entering default runlevel. The config file of /sbin/init is /etc/inittab
+
+
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+BOOT PARAM
+~~~~~~~~~~~
+	# init=/bin/bash - bypass login prompt when root pwd is forgotten and gives root shell, but will lose job control (Ctrl+C) capabilities
+	
+	# root=/dev/hdXY - informs kernel which device to use as root FS; used when incorrectly configured boot loader.
+	
+	# noapic\nolapic - turn off pnp in kernel and tell kernel to not use advanced programmable interrupt controller
+	
+	# noacpi - turn off advanced config & power capabilities, during buggy BIOS
+	
+
+
+512-bytes Boot sector
+~~~~~~~~~~~~~~~~~~~~~~
+	- 446 bytes of executable code
+	- 64 bytes for partition description: 4 x 16 bytes
+	- has last 2 bytes as boot signature: 0xAA55
+
+MBR executable loads the first sector of the active partition (VBR - Volume Boot Record)
+
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+RUNLEVEL
+~~~~~~~~
+	0) poweroff
+	1) single user mode
+	2) multi-user, text mode, no servers & networking
+	3) multi-user, text mode, servers
+	4) multi-user, GUI mode, no servers
+	5) multi-user, GUI mode, servers.
+	6) reboot
+	
+
+/etc/rc.d/rcX.d
+/etc/init.d/rcX.d
+/etc/rcX.d
+	\\ symbolic links to runlevel scripts
+		\\ S links run on runlevel start
+		\\ K links run on runlevel exit
+		
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+INSTALL MBR
+~~~~~~~~~~~
+# grub-install (hd0)
+	\\ install 1st stage MBR loader
+	
+	OR
+	
+# grub
+# root (hd0,0)
+# setup (hd0)
+	\\ install boot loader via grub shell
+
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+SECURE GRUB
+~~~~~~~~~~~
+
+# md5crypt
+
+# <password>
+
+# <digest output>
+
+# password --md5 $1$c1Vcl/$RlF6Wm6XF3amlhOcDTCdv >> /boot/grub/grub.conf
+	\\ boot menu selection sensitive
+
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+SECURE GRUB2
+~~~~~~~~~~~~~
+
+# sed -i "/^CLASS=/s/ --unrestricted//" /etc/grub.d/10_linux
+	\\ remove unrestricted
+	
+# grub2-setpassword
+	\\ creates a file /boot/grub2/user.cfg if not already present, which contains the hashed GRUB bootloader password
+
+# grub2-mkconfig -o /boot/grub2/grub.cfg
+	\\ recreate grub cfg
+	
+	
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+TROUBLESHOOTING
+~~~~~~~~~~~~~~~~
+# dd if=/dev/hda of=mbr.out count=1
+	\\ Boot sector Back-Up
+
+
+# dd if=/dev/hda of=first_sector count=1
+# dd if=/dev/hda of=next_sectors count=10 skip=1
+# hexdump first_sector
+	\\ Sector dump comparison
+	
+	
+# dmesg | more
+	\\ read ring buffer entries to disk written under /var/log/dmesg

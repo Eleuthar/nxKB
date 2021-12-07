@@ -1,0 +1,107 @@
+# rpm -iv <pkg>.rpm
+	\\ -i is major mode, will install package
+	
+	
+# rpm -qpi <pkg>.rpm
+	\\ -i is minor mode, will only provide pkg info
+	
+
+
+MAJOR MODE
+~~~~~~~~~~~
+-i -–install = Installs the package
+
+-U –-update = Updates or installs a package
+
+-F --freshen = Updates only installed package
+
+-V --verify = file size, MD5, permissions, type ...
+
+-q --query = Queries installed/uninstalled packages, and files
+
+-e --erase = Uninstall package
+
+
+
+MINOR MODE
+~~~~~~~~~~~
+a = applies to all installed packages
+
+c = together with q lists configuration files
+
+d = together with q lists documentation files
+
+f = together with q queries which package installed a given file
+
+h = adds hashes while processing
+
+i = together with q lists information about a package
+
+l = together with q lists all files and directories in a package
+
+p = together with q specifies that the query is performed on the package file
+
+v = verbose
+
+
+
+QUERY MODE
+~~~~~~~~~~~
+-qpl = query package file & list contents before install
+
+-q = query installed package
+
+-qf = query which package installed a file
+
+
+
+SPECIAL OPTION
+~~~~~~~~~~~~~~
+--nodeps = Install a package regardless of dependencies
+
+--force = force an upgrade
+
+--test = doesn’t actually install or upgrade, just prints to stdout
+
+--requires = PACKAGE together with q lists capabilities required by a package
+
+--whatrequires = CAPABILITY together with q lists packages which require the capability
+
+
+
+PACKAGE SIGNATURE
+~~~~~~~~~~~~~~~~~
+# rpm --import <pathToGPG-Key>
+	\\ load the keys of all devz involved in a project
+	
+	
+# rpm --checksig <.rpm>
+	\\ check file authenticity
+	
+	
+# rpm -V <package>
+	\\ check integrity; -a\--all = integrity check  for all installed packages
+	
+	
+	
+	SIGNATURE OUTPUT
+	~~~~~~~~~~~~~~~~~
+. = the test was successful
+
+? = the test couldn't be performed
+
+S = file size has changed
+
+M = permission mode or file type has changed
+
+5 = the file's MD5 sum has changed
+
+D = device major/minor number miss-match
+
+L = broken symbolic link
+
+U = the user owner of the file has changed
+
+G = the group owner of the file has changed
+
+T = the mtime (modified time) has changed

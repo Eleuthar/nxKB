@@ -1,0 +1,54 @@
+# var=Q
+# echo $var
+# unset $var
+	\\ variable value setting & unsettingecho
+	
+
+# set
+	\\ list all variables
+	
+
+# env
+	\\ list all exported variables
+	
+
+# $!
+	\\ PID of last child process
+
+	
+# $$
+	\\ PID of running shell
+	
+	
+# $?
+	\\ last command return code
+	
+	
+# [qQ] || [0-9]
+	\\ regex range of value, only 1 selected
+	
+	
+# {ztr1,ztr!}ng
+	\\ generate list of name with common stem, ex:ztr1ng, ztr!ng
+	
+	
+# ' '
+	\\ cancel meaning of all metachar except "\"
+	
+	
+# " "
+	\\ cancel most of the special meaning char except: |, \, $var
+	
+	
+# ` ` OR $()
+	\\ execute command enclosed & return output; used only in between " "
+	
+	
+# !!
+	\\ rerun last command
+	
+	
+# exec <cmd>
+	\\ doesn't start a sub-process, rather replace the process \ current shell used to start it
+	
+	

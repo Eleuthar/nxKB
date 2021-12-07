@@ -1,0 +1,24 @@
+# yum groupinstall\groupremove <package>
+	\\ install\remove all SW package in a group
+	
+
+# yum search <pkgREGEX>
+
+
+# yum list <exactPkgName>
+
+
+# yum remove <pkg>
+	\\ delete pkg & dependency
+	
+
+# yum erase <pkg>
+	\\ safe remove without dependency
+
+	
+# yumdownloader <destDIR>
+	\\ download pkg without installing
+	
+	
+# yumdownloader resolve
+	\\ resolve dependency & download package

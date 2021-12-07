@@ -1,0 +1,49 @@
+TRADITIONAL REGEX
+~~~~~~~~~~~~~~~~~~
+
+\<KEY   = Words beginning with ‘KEY’
+
+WORD\>  \\ Words ending with ‘WORD’
+
+[^c ]	\\ Not the character ‘c’
+
+ \[		\\ Interpret character ‘[‘ literally
+
+ .      // any character except new line
+  
+  \d    // digit
+  
+  \D    // not digit
+  
+  \w    // word char : a-z, A-Z, 0-9, _
+  
+  \s    // whitespace
+  
+  \S    // not whitespace
+ 
+ 
+ 
+  ^     // beginning of a string: ^regex
+ 
+  $     // end of a string: regex$
+ 
+  \b    // word boundary ie. \b[0-9]{1,3}\b
+  
+  \B    // not word boundary
+ 
+  []    // character set [a-zA-Z0-9_.+-], internal ^ or ! negates char
+ 
+ 
+
+
+
+EXTENDED REGEX QUANTIFIERS
+~~~~~~~~~~~~~~~
+ 
+  *         \\ zero or more characters
+  ?         \\ zero or one
+  +         \\ one or more characters
+  { n }     \\ exact number
+  { m, M }  \\ range of numbers
+  ()		\\ group 
+  | 		\\ logical OR

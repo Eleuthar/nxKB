@@ -1,0 +1,67 @@
+
+X FLOW
+~~~~~~
+ ~ runlevel 5 @ /etc/inittab
+ 
+ ~ startx --> xinit.sh (X server, xinitrc.sh)
+
+ ~ xinitrc read 
+	* Xresources (controlling x-appz) 
+	* Xclients (choosing window manager)
+
+
+
+CONFIGURATION
+~~~~~~~~~~~~~~
+
+/etc/X11/xdm/Xresources
+	\\ font, bg color, xlogin
+	
+
+/etc/X11/xdm/Xservers
+	\\ map name of display to X server, ex: 0 = local X server that runs on the first free /dev/tty
+	
+	
+/etc/X11/xdm/Xaccess
+	\\ enable XDMCP to allow remote hosts to connect to local server
+	
+
+
+
+X11 FREEZE
+~~~~~~~~~~~~
+
+Tty: Alt+Ctrl+F2
+Desktop: Alt+Ctrl+F7
+
+
+	\\ kill the front process
+Ctrl+Alt+*
+	
+	
+	\\ enable X11 restart
+setxkbmap -option "terminate:ctrl_alt_bksp" into ~/.xinitrc) by adding the line Option "XKbOptions" "terminate:ctrl_alt_bksp" into a corresponding Section "InputClass"
+
+
+	\\ REISUB
+• Alt+SysRq+R switch keyboard to 'raw' mode
+• Alt+SysRq+E send SIGTERM (termination) signal to all processes except mother init
+• Alt+SysRq+I send SIGKILL signal to all processes, a little more aggressive
+• Alt+SysRq+S sync all filesystems to prevent data loss
+• Alt+SysRq+U remount filesystems as read-only
+• Alt+SysRq+B forcefully reboot
+
+
+	\\ enable MAGIC_SYSRQ
+echo * > /proc/sys/kernel/sysrqwhere “*” is a number, which can be any one of these:-
+	0 – disable sysrq keys completely
+	1 – enable all functions of sysrq
+	2 – enable control of console logging level
+	4 – enable control of keyboard (SAK, unraw)
+	8 – enable debugging dumps of processes etc.
+	16 – enable sync command
+	32 – enable remount read-only
+	64 – enable signalling of processes (term, kill, oom-kill)
+	128 – allow reboot/poweroff
+	256 – allow nicing of all RT tasks(control the nice level(priority) of Real Time tasks)
+	

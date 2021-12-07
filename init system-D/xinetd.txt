@@ -1,0 +1,48 @@
+
+ ~ replacement for inetd; listener for other services and opens socket on event;
+ ~ logger & enforce access control restrictions based on: client machine, time of day, load on the machine;
+ ~ config is done via /etc/xinetd.conf or overridden via individual service file within /etc/xinetd.d/<serviceName>
+ 
+ 
+XINETD.D
+~~~~~~~~
+
+Service-name {
+	disable = yes/no
+	socket_type = stream for TCP and dgram for UDP
+	protocol = valid protocol from /etc/protocols
+	wait = <yes or no>
+	user= the user the application runs as
+	group= the group the application runs as
+	server= the name of the program to be run for this service
+}
+
+ 
+#pkill -HUP xinetd
+	\\ changes to fields must be reloaded via SIGHUP
+	
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+XINETD.CONF
+~~~~~~~~~~~~
+
+defaults
+{
+	log_type = SYSLOG daemon info
+	log_on_failure = HOST
+	log_on_success = PID HOST DURATION EXIT
+	cps = 50 10
+	instances = 50
+	per_source = 10
+	v6only = no
+	groups = yes
+	umask = 002
+}
+includedir /etc/xinetd.d
+
+
+ ~ cps = limit incoming connections rate to 50 and disable for 10 seconds if rate is exceeded
+ 
+ ~ instances = number of servers simultaneously active for a service

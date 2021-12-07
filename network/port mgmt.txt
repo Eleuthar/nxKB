@@ -1,0 +1,40 @@
+# chkconfig --list httpd
+	\\ show runlevels configured to start httpd in System-V
+	
+
+# chkconfig httpd off
+	\\ disable service for all runlevels on next run-level change
+	
+	
+# /etc/init.d/httpd.stop
+	\\ turn off service
+	
+	
+# nmap <scanType> -p <[T\U]port-range> <IP-range>
+	\\ type:
+	-sS = TCP SYN scan (half open)
+	-sP = ping scan
+	-sV = version detection
+	-sF = stealth FIN scan
+	-sX = Xmas tree scan
+	-sM = null scan
+	
+	
+sudo lsof -i -P -n | grep LISTEN
+sudo netstat -tuln | grep LISTEN
+sudo nmap -sTU -O <ip>
+
+
+20 = FTP transfer
+21 = FTP command control
+22 = SSH
+23 = TELNET
+25 = SMTP
+53 = DNS
+67/68 = DHCP
+80 = HTTP
+110 = POP3
+123 = NTP
+143 = IMAP
+161 = SNMP
+443 = HTTPS

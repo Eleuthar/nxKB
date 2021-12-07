@@ -1,0 +1,18 @@
+
+setfacl -m "u:user:permissions" /path/to/file
+    \\ add permission for user
+
+setfacl -m "g:group:permissions" /path/to/file 
+    \\ add permissions for a group
+
+
+setfacl -dm "entry" /path/to/dir
+    \\ allow all files or directories to inherit ACL entries
+
+
+setfacl -x "entry" /path/to/file
+    \\ remove a specific entry
+
+
+setfacl -b path/to/file
+    \\ remove all entries  

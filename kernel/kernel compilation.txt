@@ -1,0 +1,50 @@
+1.	@ installer directory find: readme.md, platform specific dir.README.md
+
+
+2.	./configure 
+	\\ dependency check & error resolution, development tools metapackage must be installed
+	\\ generate Makefile & can generate help file with "$ make help"
+	
+	
+3.	make [target]
+	\\ target defined in Makefile; generate the executable binary
+
+
+4.	make install
+	\\ copy the compiled program into user space
+	
+	
+	
+<<<<<<<<<<<<<<<<<<<<<		KERNEL COMPILATION 	  <<<<<<<<<<<<<<<<<<<<<<<<
+
+
+# pv <inputArchiveFile> | tar x<archiveType>
+	\\ show progress bar	
+	
+# tput [opt]
+	\\ display info on specific spot on terminal screen
+
+# make distclean
+
+# make defconfig
+OR
+# make menuconfig
+	\\ generate template of the .config file
+OR
+# make nconfig
+	\\ overwrite .config with settings done with ncurses
+	
+# make
+	\\ compile kernel
+
+# make modules_install
+	\\ copy modules in /lib/modules/<version>
+
+# make install
+	\\ copy SystemMap & vmlinuz in /boot
+	
+# grub2-mkconfig -o /boot/grub.cfg.new
+
+# mv grub.cfg grub.cfg.old
+
+# mv grub.cfg.new grub.cfg

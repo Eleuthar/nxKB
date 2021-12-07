@@ -1,0 +1,4 @@
+# yum install nfs-utils
+# vi /etc/exports
+# exportfs -r
+# mount.nfs example.com:/myjr /mnt/nfs/

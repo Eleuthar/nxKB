@@ -1,0 +1,105 @@
+
+
+****************************
+|     WEBPAGE DOWNLOAD     |
+****************************
+
+
+# curl -s -m 60 -L -C - http://openweathermap.org/data/2.5/weather --output dldDoc.docx
+	// -s : supress error msg and progress meter
+	// -m OR --connect-timeout: timeout after 60 seconds if offline host
+	 // -L follows redirect to avoid empty output [should be default]
+	// -C - <link> --output <docName> : resumes interrupted download by Ctrl+c
+	// --output OR -O : downloads
+  
+
+
+
+
+***************
+|     FTP     |
+***************
+
+
+# curl --cert <path-to-cert.crt>:password ftp://xmpl.com
+	// OR -E : authenticate with FTP using certificate instead of basic
+    
+    
+# curl -x 192.168.1.1 -u <username>:<password> ftp://xampl.com
+	// authenticate via proxy
+    
+ 
+# curl -T <file> ftp://xmpl.com
+	// upload file
+  
+
+
+
+
+****************************
+|     CHUNKED DOWNLOAD     |
+****************************
+ 
+curl --range 0-99999999 http://releases.ubuntu.com/18.04/ubuntu-18.04.3-desktop-amd64.iso <chunk-part-1>
+	// OR -r : byte-chunked 100MB download; repeat process until complete
+ 
+ 
+cat chunk-part-? > fullDownload.iso
+	// combine chunks into single file
+ 
+
+
+
+
+******************
+|     HEADER     |
+******************
+ 
+
+# curl -L -I xmpl.com
+	// -I : grab header of every address it is redirected to    
+ 
+    
+# curl -H 'Connection: keep-alive' -H 'Accept-Charset: utf-8 ' http://example.com
+	// pass multiple headers with individual '-H'
+        
+
+
+
+
+************************
+|     POST REQUEST     |
+************************
+ 
+
+# curl -d 'name=geek&location=ro' http://xmpl.com
+	// POST string data 
+ 
+# curl -d @filename http://xmpl.com
+	// POST file
+        
+
+
+
+
+****************
+|     SMTP	   |
+****************
+
+ 
+# curl smtp://mail.xmpl.com --mail-from volk@xmpl.com --mail-rcpt jon@xmpl.com --upload-file mail.txt
+	// send mail.txt which should be formatted correctly:
+    
+	    From: Web Admin <volk@xmpl.com>
+	    To: jon doe <jon@xmpl.com>
+	    Subject: xmpl
+	    Date: Sat, 7 Dec 2019 02:10:05
+	    
+	    Kvay,
+	    Merge treaba.
+	    -Volk
+    
+    
+# curl -u <usrname>:<password> imap://mail.xmpl.com -X 'UID FETCH 4454'
+	// login to mail server using IMAP
+	// view specific message by its UID

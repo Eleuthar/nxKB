@@ -1,0 +1,56 @@
+
+DAEMON
+~~~~~~~~
+ ~ syslogd
+	\\ application logs
+	
+	
+~ klogd
+	\\ kernel logs
+	
+
+/var/logs
+	\\ contains a set of log files:
+		* cron = log generated when cron execute
+		* mail = log related to mail
+		* messages = all logs except auth, cron, mail & news
+		* secure = log all failed auth, user added\deleted
+
+
+/etc/syslog.conf
+	\\ read by syslogd; an alternative conf can be specified with syslogd -f
+
+# pkill -HUP syslogd
+	\\ re-read daemon conf
+	
+	
+	
+RULE FORMAT
+~~~~~~~~~~~~~~
+
+facility.level			action
+
+Facility = [auth, authpriv, cron, daemon, kern, lpr, mail, news, syslog, user, uucp, local0..7]
+	\\ local0..7 used to create custom log files
+	
+Level = [debug, info, notice, warning, err, crit, alert, emerg, non, *]
+
+Action = [append to file "/path/to/file", write to device "/dev/console", forward to remote host "@hostname", write to user "username"]
+
+
+
+CENTRAL LOGGING
+~~~~~~~~~~~~~~~~~~
+
+~	@hostname is used to forward logs to central server, due to security reasons; sender host must contain in /etc/services or /etc/sysconfig : "syslog 514/udp"
+
+~	on the remote host, the syslog start-up script must contain the "-r" flag to receive messages on UDP port 514
+
+
+
+LOGGER
+~~~~~~~~
+
+# logger "text" 
+	\\ send default user.notice priority message to /var/log/messages
+	\\ -p can modify priority, but only if conf is edited to handle the logger priority

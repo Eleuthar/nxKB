@@ -1,0 +1,43 @@
+/etc/spool/cron/<uzr>
+	\\ user-defined crontab location
+		
+	<minute> <hour> <day of month> <month> <sun 0 - sat 7>
+
+	
+/etc/cron.d || crontab
+	\\ system crontab with extra field between day & cmd, to define target uzr (root usually)
+
+	\% = newline
+	
+
+/etc/cron.allow || .deny
+	\\ define other uzr than root allowed || denied to run cronjob
+	
+
+
+ANACRON - for non 24\7 machine
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/etc/anacrontab
+	\\ anachronistic cron
+	
+	<time> <delay> <job ID> <cmd>
+	
+
+# atq
+	\\ print pending jobs
+	
+	
+# atrm <jobID-1> <jobID-2>
+	\\ remove anacron jobz defined with at
+
+
+/var/spool/anacron
+	\\ record when jobs are run
+	
+	
+# at -f input.sh -v <time>
+	\\ run job once with script as input @ <time>
+	
+	
+
+	

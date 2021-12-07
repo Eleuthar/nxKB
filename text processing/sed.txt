@@ -1,0 +1,49 @@
+
+# sed '/pattern/d' tzt.txt
+	\\ delete pattern
+	
+
+# sed 's/pattern1/pattern2/g' tzt.txt
+	\\ replace pattern1 with pattern2 globally
+	
+
+# sed '/pattern s/pattern1/pattern2/g' tzt.txt
+	\\ if the line contains "pattern", then replace pattern1 with pattern2
+	
+	
+# sed -e '/pattern/d' -e 's/pattern1/pattern2/g' tzt.txt
+	\\ execute multiple sequential commands
+	
+	
+# sed -f commands.txt tzt.txt
+	\\ read commands from input file "commands.txt"
+	
+
+# sed 's/txt/TXT/g' file.txt > File.txt
+	\\ create a new file with the replacement of "txt" as "TXT"
+	
+sed -i.bak '/^2019\/\|^2020\/0[1-6]\|^2020\/07\/0[1-9]\|1[0-6]/d' ./app.log
+
+
+cat my.csv | sed -r '4,8d'
+    // print all lines except 4 to 8;
+ 
+ 
+cat my.csv | sed -r '/String/d'
+    // print all lines except those containing "String"; d=delete
+ 
+ 
+cat my.csv | sed -r '4,8p'
+    // print only lines from 4 to 8; p=print
+
+ 
+cat my.csv | sed -r '/String/p'
+    // print only lines containing "String"; p=print
+    
+    
+cat my.csv | sed -r 's/String_To_Replace/Replacement_String/'
+    // replace first occurrence of the "String_To_Replace"; case sensitive
+    
+    
+cat my.csv | sed -r 's/String_To_Replace/Replacement_String/gi'
+    // replace global occurrence, case insensitive

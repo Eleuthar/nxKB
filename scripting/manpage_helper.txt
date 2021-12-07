@@ -1,0 +1,24 @@
+# whatis
+# apropos
+	\\ display manual page descriptions
+	
+# man -k <app>
+	\\ show man page description & names
+	
+# man [1-9] <cmd>
+	\\ go to cmd manpage section number
+	
+	
+	
+Manpage Sections
+~~~~~~~~~~~~~~~~
+Section 1 = Information on executables
+Section 2 = System calls, e.g mkdir(2)
+Section 3 = Library calls, e.g stdio(3)
+Section 4 = Devices (files in /dev)
+Section 5 = Configuration files and formats
+Section 6 = Games
+Section 7 = Macro packages
+Section 8 = Administration commands
+Section 9 = Kernel routines
+

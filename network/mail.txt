@@ -1,0 +1,27 @@
+
+# yum install postfix
+	\\ MTA = mail transfer agent; used to send mail
+
+
+# vi /etc/postfix/main.cf
+	inet_interfaces = all
+	inet_protocols = all
+	mydestination = $myhostname, localhost.$mydomain, localhost, example.com
+	mynetworks = 168.100.189.0/28, 127.0.0.0/8, 192.168.0.0/16, 10.0.0.0/8
+	
+	
+# postconf -n2	
+	\\ display modified config, compared to default
+	
+	
+# journalctl -u postfix
+	\\ check mail log from client
+	
+	
+# more /home/student/Maildir/new/<mail>
+	\\ mail location as configured in main.cf
+	
+	
+# yum install dovecot
+	\\ MDA = mail delivery agent; used to retrieve mail
+	\\ edit /etc/dovecot/conf.d/: 10-auth, 10-mail, 10-ssl

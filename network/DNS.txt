@@ -1,0 +1,93 @@
+
+LOCAL DNS
+``````````````
+
+1. /etc/hosts
+	\\ <ip>	<hostname> mapping
+	\\ immediate effect, no need to reload svc or cfg
+	
+	
+2. /etc/resolv.conf
+	\\ dynamic <hostname> <ip> mapping, DO NOT EDIT
+	
+	
+3. /etc/nsswitch.conf
+	\\ define DNS query order
+	
+
+
+CMD
+``````
+
+# host domain.org
+	\\ return ip address and mailserver
+	
+	
+# dig domain.org NS||AAAA||MX||TXT
+	\\ return records: NS or IPV6 or MX or TXT
+	
+	
+# yum install bind bind-utils
+	\\ DNS server package
+
+
+# vim /etc/named.conf
+	\\ old DNS server cfg; new is bind.conf
+
+	
+# named-checkconf /etc/named.conf
+	\\ validate conf
+	
+
+# systemctl start|enable named
+# ss -tlpn | grep :53
+OR
+# lsof -i4 -nP
+	\\ start service and check listening connection
+	
+
+# rndc dumpdb -cache
+# cat /var/named/data/cache_dump.db | grep "kernel.org"
+	\\ verify DNS server cache
+
+
+/etc/hosts
+	\\ static DNS lookup
+	
+	
+/etc/resolver.conf
+	\\ store nameserver and default domain search directive
+	
+	
+/etc/nsswitch.conf
+	\\ order of name lookup, ex: "hosts: files, dns" = first /etc/hosts, then DNS server
+	
+# systemd-resolve --status
+	\\ identify DNS server
+	
+	
+
+BUILD AUTHORITATIVE NS
+```````````````````````
+
+/var/named/named.ca
+	\\ hold list of TLD NS
+
+# vi /etc/named.conf.local
+	\\ define <domain.com>
+
+# rndc reload
+	\\ name server control utility
+	
+zone file:
+	@ = zone name
+	SOA = start of authority
+	
+# named-checkconf /etc/named.conf
+
+# named-checkzone xmpl.com /var/named/xmpl.com
+
+# systemctl restart named
+
+@client
+# dig example.com

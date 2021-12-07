@@ -1,0 +1,122 @@
+INIT CMD
+~~~~~~~~~
+
+sysv-rc-conf
+    # add || remove runlevel service in system-V
+
+
+sysv-rc-conf --list <service>
+
+
+sysv-rc-conf --level 45 <service> on
+    # will remove from existing levels and set to "4 & 5";
+    # "off" will do opposite action
+
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+HARDEN INIT
+~~~~~~~~~~~
+
+ss:S:respawn:/bin/sulogin >> /etc/inittab
+	\\ prevent root shell upon booting in single-user mode, enforcing sulogin to run and request for root pwd
+	
+
+for SERVICE in rescue emergency ; do 
+   sed '/^ExecStart=/ s%"/sbin/sulogin;%"/sbin/sushell;%' /usr/lib/systemd/system/$SERVICE.service > /etc/systemd/system/$SERVICE.service
+done
+	\\ in systemd, single-user root access effect is obtained via rescue & emergency.target configured in "/usr/lib/systemd/system/emergency.service", where /usr/sbin/sulogin is replaced with /sbin/sushell
+	
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+SYSTEMD UNIT
+~~~~~~~~~~~~~
+
+systemd unit-files directives
+	1. mount\automount
+	2. service
+	3. socket
+	4. target
+	5. timer
+	
+sys-d status = runlevel target symlink to service (enabled \ disabled)
+
+
+[Unit]
+Description=Simple Http Server
+Documentation=https://docs.python.org/3/library/http.server.html
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 -m http.server
+ExecStop=/bin/kill -9 $MAINPID
+
+[Install]
+WantedBy=multi-user.target
+
+
+
+******************************
+|     EDIT SERVICE FILES     |
+******************************
+
+ 
+systemctl edit --full [service]
+	\\ no '--full' creates empty addendum [service].service.d
+	\\ overrides values from /etc/systemd/system/[target].target.wants/[service]
+	\\ same result can be obtained by creating a directory etc/systemd/system/httpd.service.d/ and drop overriding files
+	\\ overrides package mgr installations under /usr/lib/systemd/system
+    
+    
+* add section [SERVICE]
+Restart=always
+ 
+sudo systemctl daemon-reload
+    \\ load new config from service file
+
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+CMD
+~~~~~
+
+$ runlevel
+	\\ output previous (N if non) and current runlevel
+	
+	
+$ init [1-6]
+
+
+ls -l /sbin/init == /sbin/init -> /lib/systemd/systemd
+	\\  check if system-d
+	
+systemctl get-default
+ 
+systemctl set-default [target]
+ 
+systemctl isolate [target] 
+ 
+systemctl poweroff \\ halt \\ reboot
+ 
+systemctl enable \\ disable \\ status \\ start \\ restart [name].service 
+ 
+systemctl is-enabled [service]
+	\\ returns enabled\disabled response
+ 
+systemctl list-unit-files --type service
+	\\ show all services, checks if enabled
+ 
+systemctl --failed
+	\\ show which daemons failed to start upon boot
+ 
+hostnamectl
+	\\ detailed info about host machine
+
+hostnamectl set-[property] propName
+    
+timedatectl list-timezones || set-timezone
+    \\ manage time settings: sync service, time keeping etc 

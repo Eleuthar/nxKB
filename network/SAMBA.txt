@@ -1,0 +1,14 @@
+
+# vi /etc/samba/smb.conf
+# testparm
+	\\ add new share and test config
+	
+	
+# systemctl start smb nmb
+	\\ start listening on port: 445, 139, 138, 137 
+
+@client
+# mount.cifs //<serverIP\hostname>/<share> /mnt/samba -o user=student,pass=student1,dom=WORKGROUP
+	\\ mount shared dir
+
+

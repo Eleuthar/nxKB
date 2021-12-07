@@ -1,0 +1,26 @@
+/proc/scsi/scsi
+	\\ detected SCSI devices
+
+
+/proc/interupts
+
+
+/proc/ioports
+	\\ Port IO device addresses used in communication with CPU; alternative to  
+	
+
+/proc/iomem
+	\\ MMIO (memory mapped IO) for device-CPU communication
+	
+
+/proc/dma
+	\\ optimization of PIO & MMIO, allows dev IO directly to memory, bypassing CPU
+	
+
+# hdparm -d1 /dev/sda
+	\\ enable DMA or check current setting with -d
+	
+	
+/usr/share/misc/pci.ids
+	\\ PCI ID database; when missing, lspci -vv outputs XX:ZZ ID format
+	

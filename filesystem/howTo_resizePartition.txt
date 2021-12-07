@@ -1,0 +1,18 @@
+Grow partition ‘/dev/sda4’ from 14,96 GiB to 210,27 GiB
+=======================================================
+
+
+//Job: Check file system on partition ‘/dev/sda4’
+# e2fsck -f -y -v /dev/sda4 
+
+
+//Job: Set geometry of partition ‘/dev/sda4’: Start sector: 103.450.624, length: 440.963.072 
+# sfdisk --force /dev/sda -N 4 
+
+
+//Job: Resizing file system from 31.363.072 to 440.963.072 sectors. 
+# resize2fs /dev/sda4 440963072s 
+
+
+//Job: Check file system on partition ‘/dev/sda4’ 
+# e2fsck -f -y -v /dev/sda4 

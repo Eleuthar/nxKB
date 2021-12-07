@@ -1,0 +1,75 @@
+# nohup binaryExec &
+	\\ avoiding HUP from log off, by acting as parent process independently from user session.
+	
+
+# pstree
+	\\ show parent-child process hierarchy
+	\\ -p = display PID, -h = highlight user process only
+
+	
+# ps ux
+	\\ all process run by the user
+	
+
+# ps T
+	\\ all process run under the current terminal by the user
+	
+	
+# ps aux
+	\\ all process on the system
+	\\ KB value of actual memory & processor usage: VSZ  = RSS (aka RAM) +SWAP
+
+
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+SIGNAL
+~~~~~~
+30 standard signals
+
+
+SIGHUP || 1 	
+	\\hangup signal sent to a process if its current terminal session is shut before completing its execution 
+	\\ hangup can be prevented with 'nohup' cmd 
+	\\ servers will only read again the config file
+	
+	
+SIGINT || 2
+	\\ Ctrl+C interrupt
+
+
+SIGQUIT || 3	
+	\\ ends the process but also causes the shell to write a core file to help the so-called post-mortem debug
+
+	
+SIGKILL || 9
+	\\ kill process via init (kernel call); does not reach application to be handled\avoided by programmer
+
+	
+SIGTERM || 15
+	\\ terminate a process nicely; Default signal
+	
+
+
+
+kill %{{job_id}}
+	\\Terminate a background job
+
+
+kill -{{17||STOP}} {{process_id}}
+	\\Signal the operating system to pause a program until a SIGCONT ("continue") signal is received
+ 
+
+kill -{{SIGUSR1}} -{{group_id}}
+	\\Send a SIGUSR1 signal to all processes with the given GID (group id)
+
+ 
+trap "command" <signals>
+    \\ cannot trap sigkill and sigstop
+ 
+ 
+trap - <signals>
+    \\ remove traps for specified signals
+	
+	

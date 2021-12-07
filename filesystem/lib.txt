@@ -1,0 +1,29 @@
+/usr/lib/systemd/
+	\\ systemd configuration files
+	
+
+/lib
+	\\ /bin programz
+	
+	
+/usr/lib
+	\\ /usr/bin programz
+	
+
+/etc/ld.so.conf
+	\\ specify additional locations for library files
+	
+	
+/etc/ld.so.cache
+	\\ fast cache created by "ldconfig" cmd to parse trusted dir for lib location & loading optimization
+	
+	
+# ldd <appPath>
+	\\ check if app is statically linked or the dependecy for dinamically linked app
+	\\ good to check if a service uses libwrap (TCP wrapper)
+	
+	
+# export LD_LIBRARY_PATH=/usr/lib:/opt/<app>/lib
+	\\ add lib to search path for temporary overriding of lib defined in "ld.so.cache"
+	
+	

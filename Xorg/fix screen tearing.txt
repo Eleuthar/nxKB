@@ -1,0 +1,90 @@
+*****************
+|   ON INTEL    |
+*****************
+
+intel-virtual-output may be required for external monitor to work
+
+/etc/X11/xorg.conf.d/20-intel.conf
+----------------------------------
+
+1st method
+``````````
+Section "Device"
+   Identifier  "Intel Graphics"
+   Driver      "intel"
+   Option      "TearFree"    "true"
+EndSection
+
+# reboot
+
+
+2nd method
+``````````
+Section "Device"
+   Identifier "Intel Graphics"
+   Driver "intel"
+   Option "AccelMethod" "uxa"
+   Option "TearFree" "true"
+EndSection
+
+# reboot
+
+
+3rd method
+``````````
+Section "Device"
+   Identifier "Intel Graphics"
+   Driver "intel"
+   Option "AccelMethod" "uxa"
+   Option "TearFree" "true"
+   Option  "TripleBuffer" "true"
+EndSection
+
+# reboot
+
+ultimately:
+
+/etc/environment
+----------------
+CLUTTER_PAINT=disable-clipped-redraws:disable-culling
+CLUTTER_VBLANK=True
+
+
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+*****************
+|   ON NVIDIA   |
+*****************
+
+1st method
+```````````
+sudo nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }"
+
+OR
+
+Option "metamodes" "nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }"
+
+BEST! 
+
+nvidia-settings --assign CurrentMetaMode="$(xrandr | sed -nr '/(\S+) connected (primary )?[0-9]+x[0-9]+(\+\S+).*/{ s//\1: nvidia-auto-select \3 { ForceFullCompositionPipeline = On }, /; H }; ${ g; s/\n//g; s/, $//; p }')"
+
+
+
+2nd method
+```````````
+/etc/profile.d/kwin.sh:
+#!/bin/sh
+export KWIN_TRIPLE_BUFFER=1
+
+~/.config/kwinrc
+[Compositing]
+MaxFPS=60
+RefreshRate=60
+
+
+
+3rd method
+```````````
+KDE with nvidia-xrun

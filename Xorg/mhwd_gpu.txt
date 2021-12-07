@@ -1,0 +1,133 @@
+// report installed drivers
+inxi -G
+
+// get current OpenGL renderer
+glxinfo | grep OpenGL
+
+// list available drivers, optional detailed view, pci or usb
+mhwd -l [-d] [--pci]
+
+// install proprietary GPU driver
+mhwd -i pci video-nvidia
+
+// uninstall driver
+mhwd -r pci <name>
+
+// check config between operations
+mhwd-gpu --check
+mhwd-gpu --status //reads xorg.conf.d/90-mhwd.conf
+
+// try to fix issues
+mhwd-gpu --setmod
+mhwd-gpu --setxorg <PATH>
+
+
+
+------------------------------------------------
+|     PRIME GPU offloading for free drivers    |
+------------------------------------------------
+
+// run a program with a specific GPU prepending DRI_PRIME where x is the card prio number
+DRI_PRIME=x
+
+// set discrete GPU as default for a given app:
+cp <appName>.desktop ~/.local/share/applications
+
+//edit exec property
+Exec=DRI_PRIME=1 <appName>
+
+
+
+---------------------------------
+|       NVIDIA proprietary      |
+---------------------------------
+# chmod +x ./autoconfig.sh && ./autoconfig.sh
+
+// install hybrid driver
+sudo mhwd -i pci video-hybrid-intel-nvidia-440xx-prime -f
+// if CUDA not available, run nvidia-modprobe first
+
+// start with fresh X11 config
+sudo rm -rf /etc/X11/xorg.conf.d/90-mhwd.conf
+    
+// check OPTIMUS CONF !!!
+sudo cp -i optimus.conf /etc/X11/xorg.conf.d
+
+// REPLACE mhwd gpu.conf & nvidia.conf with custom nvidia.conf
+sudo rm /etc/modprobe.d/mhwd-gpu.conf
+sudo rm /etc/modprobe.d/mhwd-nvidia.conf
+
+// blacklist nouveau, nvidiafb, rivafb
+sudo cp -i nvidia.conf /etc/modprobe.d
+
+// add "options nvidia_drm modeset=1"
+sudo cp -i nvidia-drm.conf /etc/modprobe.d
+
+// [X11] ServerArguments=-nolisten tcp -dpi 94
+sudo cp -i dpi.conf /etc/sddm.conf.d
+
+// set xrandr on startup: xrandr --setprovideroutputsource modesetting NVIDIA-0; xrandr --auto
+sudo cp -i Xsetup /usr/share/sddm/scripts
+
+// run Xsetup
+sudo chmod +x /usr/share/sddm/scripts/Xsetup
+reboot
+
+// make startup file executable
+# chmod +x /usr/share/sddm/scripts/Xsetup"
+
+glxinfo | grep -i vendor
+
+            OR
+
+sudo pacman -S nvidia-XXX
+/* installed 
+ nvidia-prime (1.0-3)
+ lib32-nvidia-440xx-utils
+ linux54-nvidia-440xx 
+ */
+sudo pacman -S nvidia-prime !N\A
+sudo pacman -S nvidia-settings !incomplet
+sudo pacman -S nvidia-utils (default XXX)
+sudo pacman -S lib32-nvidia-utils (default XXX)
+sudo pacman -S opencl-nvidia OK
+sudo pacman -S lib32-libvdpau OK
+sudo pacman -S libvdpau OK
+sudo pacman -S ibxnvctrl OK
+sudo pacman -S lib32-opencl-nvidia-440xx                                             
+sudo pacman -S xorg-server-devel
+
+sudo pacman -S yay
+yay -S optimus-manager
+yay -S optimus-manager-qt
+
+# https://wiki.manjaro.org/index.php?title=Configure_Graphics_Cards#NVIDIA_Proprietary_.28non-free.29_drivers
+
+# https://wiki.manjaro.org/index.php?title=Configure_NVIDIA_(non-free)_settings_and_load_them_on_Startup
+
+// PRIME offloading
+prime-run <appName>
+
+// Bumblebee offloading
+optirun <appName>
+primusrun <appName>
+
+
+
+-----------------------------
+|       TROUBLESHOOTING     |
+-----------------------------
+// Remove the NVIDIA driver
+sudo mhwd -r pci video-nvidia    
+
+reboot
+
+nano /etc/mkinitcpio.conf 
+// delete the word nouveau from the MODULES line:
+MODULES="" 
+
+// reconfigure current kernel
+sudo mkinitcpio -p [linux kernel version]
+
+// auto reinstall nvidia non free 
+mhwd -a pci nonfree 0300

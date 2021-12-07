@@ -1,0 +1,42 @@
+store under /run/log/journal/
+
+
+journalctl-n10
+
+
+journalctl-pcrit\\err\\alert\\notice\\emerg
+
+
+journalctl-overbose[export]
+
+
+journalctl-ojson
+
+
+journalctl-b
+	\\ Show all messages since boot
+
+
+journalctl-b-1
+	\\ Show all messages from last boot
+
+
+journalctl-f
+	\\ Follow new messages(like tail-f for traditional syslog)
+
+
+journalctl-u{{unit}}
+	\\ Show all messages by a specific unit
+
+
+journalctl--since{{now|today|yesterday|tomorrow}}--until{{YYYY-MM-DDHH:MM:SS}}
+	\\ Filter messages within a time range (either timestamp or placeholder like"yesterday")
+
+
+journalctl_PID={{pid}}
+	\\ Show all messages by a specific process
+
+
+journalctl{{path/to/executable}}
+	\\ Show all messages by a specific executable
+

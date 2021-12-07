@@ -1,0 +1,97 @@
+~ Superblock = 1st part of any HDD, contains geometry definition & partition layout
+ 
+ 
+0. Connect & Verify HDD
+	# dmesg | grep -i attached
+	# lshw -short | grep disk
+	# lsblk -f
+	
+	
+1. Partitioning
+	# fdisk /dev/sdQ > interactive menu
+		OR
+	# parted > mklabel gpt > unit % > mkpart primary <start%> <end%>
+
+
+2. FileSystem
+	# df -hi
+	\\ get inode statistic
+	# mkfs -t ext4 /dev/sdb1		
+	# mkfs -t xfs /dev/sdb2
+	# blkid
+	\\ view device-uuid mapping
+	
+
+3. Mounting
+	# mount -t <type> <partition> <mountPoint>
+	
+	/etc/mtab & /proc/mounts are not persistent
+	/etc/fstab is persistent: <partition OR UUID="uuid">	<mountPoint>	<fsType>	<flagList=defaults>
+	
+	
+
+LVM
+````````
+
+* separate PV (physical volume) can be dynamically grouped into VG (volume group)
+
+* VG can contain unlimited LV (logical volume)
+
+* default EXTENT size is 4M: smallest unit (sector-like) used by LVM to map LV item to PV item with MAPPER (LVM DB)
+
+
+
+# pvcreate /dev/sdb1 /dev/sdc2
+	\\ make physical vol from a number of disk partitionz
+	
+	
+# pvdisplay
+	\\ PV overview: PE = extent 
+	\\ pvs == short version
+
+# vgcreate <VGname> <PV: /dev/sdXZ /dev/sdQZ>
+
+
+# vgdisplay
+	\\ vgs == short version
+
+
+# lvcreate -L 1G -n <VGname> </dev/sdXZ>
+	\\ make 1G LV named moviez in VG with affinity to partition
+	
+
+# lvdisplay
+	\\ lvs == short version
+	
+	
+# mkfs -t ext4 /dev/mapper/<VGname> 
+
+
+# mount /dev/<VGname> /muziq
+
+
+# umount /dev/mapper/vol*
+
+
+# vgchange -a n <VGname>
+
+
+# wipefs -a /dev/sdQZ
+	\\ erase LVM signature from target
+	
+
+	
+<<<<<<<<<<<<<<<<<<<<<	RAID	<<<<<<<<<<<<<<<<<<<<<<<
+
+
+# mdadm --create /dev/md0 --level=5 --raid-devices=3 /dev/sdb2 /dev/sdc1 /dev/sdc2
+	\\ create raid5
+	
+
+# mdadm --detail --scan
+
+# mount /dev/mdX <path>
+
+# umount /dev/mdX
+
+# mdadm --stop /dev/mdX

@@ -1,0 +1,80 @@
+DETERMINE FS TYPE
+~~~~~~~~~~~~~~~~~~
+
+# lsblk -f
+
+# fsck -N /dev/QdXY
+
+# cat /etc/fstab
+	\\ device : mount-point : fstype : options : dump-number : fsck-number
+	\\ options
+		
+		* atime \ noatime = enable or disable record file atime (access), mtime (modified) & ctime (created);
+		
+		* reltime = update atime if older than mtime
+		
+		* auto \ noauto = enable or disable auto mount device at bootup; also auto when mount -a is executed
+		
+		* dev \ nodev = interpret or not, block special dev on FS
+		
+		* exec \ noexec = allow \ prevent binary exec on that partition
+		
+		* ro = mount read-only
+		
+		* rw = mount read-write
+		
+		* sync \ async = input-output policy
+		
+		* suid \ nosuid = permit \ block operation of suid & sgid bits
+		
+		* user \ users \ nouser = permit to mount fs with noexec, nosuid, nodev unless overridden; on nouser, only root can mount
+
+# df -Th
+
+
+
+EXT2,3,4 & XFS
+~~~~~~~~~~~~~~~
+
+# e2fsck
+	OR
+# fsck -t <fstype> <device>
+	\\ fsck binary that checks and corrects inconsistencies
+	
+	
+# mke2fs
+	\\ create ext2 FS
+	
+
+# tune2fs
+	\\ modifiy FS param
+	
+	
+# dumpe2fs
+	\\ print superblock & block group info
+	
+	
+# mount /dev/sdQZ /mnt
+
+# mount -a
+	\\ mount all unmounted dev in /etc/fstab that have noauto
+	
+	
+
+FS FORMATING
+~~~~~~~~~~~~
+
+# mkfs -t <fstype> <device>
+	\\ format FS before partitioning
+	
+	
+# mke2fs -j <device>
+	\\ make ext3 FS by enabling journaling
+	
+	
+# mkswap <device>
+	\\ create swap space
+	
+	
+# swapon <device>
+	\\ activate swap

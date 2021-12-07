@@ -1,0 +1,233 @@
+
+/etc/nologin
+	\\ if this is present, only root can log in; the file can contain  an optional message to display after authentication
+	
+
+/etc/security/limits.d/*
+	\\ limit user: process count, core file size, data size, locked-in-memory address space, open files, CPU time, simulatenous logins for this uzr, number of file locks
+	
+
+/etc/security/access.conf
+	\\ disallow logins for uzr & group from specific location
+	
+	
+!!! with #ulimit, uzr can up their soft limit no greater than hard limit
+!!! uzr can irreversibly lower their hard limit
+
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+SID \ SGID \ STICKY
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ ~ SUID = set user ID, with symbolic value "s" or numerical "4000"; allows non-root uzer to change system file
+ 
+
+ ~ SGID = set group ID with symbolic value "s" or 2000; change group ownership of directory items subsequently created to the directory group ownership
+	
+
+~ sticky bit = value 1000 or symbolic value "t"
+	* applied to directory prevents users deleting files unless are the owner; 
+	
+	* applied to files causes faster loading in memory
+
+
+# chmod 4755 /bin/passwd
+# chmod u+s /bin/passwd
+	\\ set SUID on cmd
+	
+
+
+# chmod 4755 /bin/cat
+	OR
+# chmod u+s /bin/cat
+	\\ SID run executable with effective permission of owner
+	
+	
+# chmod 2755 /bin/cat
+	OR
+# chmod g+s /bin/cat
+	\\ SGID on directory grant effective permission of dir owner for file subsequently created
+	
+
+# chmod 1755 /bin/tmp
+	\\ prevent deletion of items by all, except owner
+
+
+# stat /usr/bin/passwd
+	\\ show binary & octal representation of permission
+	\\ SIG (4), SGID (2), & sticky (1) can be aggregated to 7xxx
+	
+
+-rwsr-sr-t
+	\\ "s" = SID\SGID, "t" = sticky bit on; s & t replace x;
+	
+	
+# find / -user root -perm +4000 2> /dev/null
+	\\ numerical permission value of 4000 = setuid bit on
+
+
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+ 
+
+USERADD OPTIONS
+~~~~~~~~~~~~~~~~~~
+	-c = comment (Full Name)
+	-d = path to home directory
+	-g = initial group (GID). The GID must already exist
+	-G = comma separated list of supplementary groups
+	-u = user’s UID
+	-s = user’s default shell
+	-p = password (md5 encrypted, use quotes!)
+	-e = account expiry date
+	-k = the skel directory
+	-n = switch off the UPG group scheme
+
+
+# useradd -D
+	\\ list default options from /etc/default/useradd
+	
+	
+# id <uzr>
+	\\ print basic user info & group membership
+
+
+# newgrp <group>
+	\\ join existing group
+	
+
+# groupadd -g <group>
+	\\ create group & add entry to /etc/group, optionally assign GID
+	
+
+# gpasswd -a || -d <uzr> <group>
+	\\ add || delete uzr from group; -A define admin
+	
+# useradd {{user}}
+
+
+# userdel {{user}}
+
+
+# passwd {{user}}
+
+
+# usermod –a -G staff,accounts {{user}}
+							\\ add myuser to secondary groups and append to existing group list
+
+# gpasswd –a {{user}} {{group}}
+							\\ add user to group
+	    -d {{user}} {{group}}
+							\\ remove user from group
+		-A {{ user list }}
+							\\ set administrators
+		-M {{ user list }}
+							\\ add multiple users to group
+		
+
+
+# groupadd {{group}}
+
+# groupdel {{group}}
+
+# groupmod -n {{new_group_name}} {{old_group_name}}
+
+# groupmod -g {{new_group_id}} {{old_group_name}}
+	
+	
+# stat /usr/bin/passwd
+	\\ file info
+	
+
+chown [user[:group]] <file>
+
+
+sudo chmod 771 <filename>
+    // change permission for file
+    
+sudo chmod 771 <foldername> -R
+    // change permission for folder 
+ 
+sudo chmod +x <path-to-file>
+    // makes file executable
+    
+sudo chown -R <username> <foldername>
+    // change ownership for folder    
+    
+sudo chown <username> <filename>
+    // change ownership for file    
+ 
+sudo chgrp -R <groupname> <foldername>
+    // change group ownership for folder    
+    
+sudo chgrp <groupname> <filename>
+    // change group ownership for file
+
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+USERMOD OPTIONS
+~~~~~~~~~~~~~~~~~~
+-d = the users directory
+-g = the users initial GID
+-l = the user's login name
+-u = the user's UID
+-s = the default shell
+
+
+# usermod -L || passwd -l
+	\\ lock account
+	
+	
+# usermod -U || passwd -u
+	\\ unlock account
+	
+	
+# passwd -d 
+	\\ remove password; optionally assign /bin/false to uzr default shell
+	
+	
+# chage [EmMWl]
+	\\ change aging policy:
+	E = set expiry
+	m = set min no. of days between change, 0 = none
+	M = set max pwd lifetime
+	W = set warning period before expire
+	l = list current aging values for an account
+	
+	
+# userdel -r <uzr>
+	\\ remove uzr with home directory
+	
+	
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+SUDO
+~~~~
+
+/var/log/secure
+	\\ log all sudo actions
+	
+
+<uzr> ALL=(ALL) /sbin/iptables
+
+
+<uzr> <hostname>=(runAsUzr) /bin/ls, /home/runAsUzr/bin/tzt.sh
+	\\ allow <uzr> to run as <runAsuzr> the 2 cmd, only on machine <hostname>
+
+
+User_Alias ADMINS = jsmith, mikem
+Cmnd_Alias SOFTWARE = /bin/rpm, /usr/bin/up2date, /usr/bin/yum
+Cmnd_Alias SERVICES = /sbin/service, /sbin/chkconfig
+Cmnd_Alias STORAGE = /sbin/fdisk, /sbin/sfdisk, /sbin/parted, /sbin/partprobe, /bin/mount,
+/bin/umount
+Host_Alias FILESERVERS = fs1, fs2
+Host_Alias MAILSERVERS = smtp, smtp2
+
+ADMINS FILESERVERS = STORAGE
+chris ALL = SOFTWARE
+%wheel ALL = (ALL) ALL

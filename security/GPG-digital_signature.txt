@@ -1,0 +1,34 @@
+
+$ gpg --gen-key
+	\\ generate private-public key pair
+	
+	
+$ gpg --export --armor -o <uzr>.pub <partialID>
+	\\ export public key to ascii file, using a fragment of the key's user ID
+	
+
+$ gpg --import <otherID>.pubs
+	\\ after exchange, import public key into keyring
+	
+	
+$ gpg --list-keys
+	\\ view public keyring
+	
+
+$ gpg --sign-key <otherID>
+	\\ sign partner key with private key before communication
+	
+
+$ gpg --encrypt --armor --recipient <otherID> secret.txt
+	\\ generate secret.txt.asc file to be emailed to otherUzr
+	
+	
+$ gpg --decrypt -o <mzg>.txt secret.txt.asc
+	\\ other uzr decrypting mzg
+	
+	
+$ gpg --encrypt --sign --armor --recipient <otherUzr> secret.txt
+	\\ encrypt & sign the message by hashing the content and encrypt with private key
+
+
+

@@ -1,0 +1,97 @@
+/etc/dpkg/dpkg.cfg
+	\\ default optionz
+	
+	
+/var/lib/dpkg/available 
+	\\ available package
+	
+
+/var/lib/dpkg/status
+	\\ available package status
+	
+	
+/var/lib/dpkg/information
+	\\ control files which allow execution of scripts before & after install & remove
+	
+ 
+ ~ dpkg is used for installing package with no dependencies maintains some usable information about available packages, divided in
+three classes: states, selection states and flags.
+
+
+
+STATE
+~~~~~
+- installed = The package is unpacked and configured OK.
+
+- half-installed = The installation of the package has been started, but not completed for some
+reason.
+
+- not-installed = The package is not installed on your system.
+
+- unpacked = The package is unpacked, but not configured.
+
+- half-configured = The package is unpacked and configuration has been started, but not yet
+completed for some reason.
+
+- config-files = Only the configuration files of the package exist on the system.
+
+
+
+FLAG
+~~~~~
+- hold = A package marked to be on hold is not handled by dpkg, unless forced to do that
+with option --force-hold.
+
+- reinst-required = A package marked 
+reinst-required is broken and requires reinstallation. These
+packages cannot be removed, unless forced with option --force-reinstreq.
+
+
+
+ACTION
+~~~~~~
+-l = Prints a list of the packages installed on the system, or matching a pattern if any is
+given. The first three characters on each line show the state, selection state, and
+flags of the package
+
+-s = Shows the status and information about particular installed package(s)
+
+-I = Show information about a package in a .deb file
+
+-L = List the files included in a package
+
+-S = Show the package which includes the file specified
+
+-i = Install (or upgrade) and configure a package from a .deb file
+
+--unpack = Unpack (only) a package in a .deb file
+
+--configure = Configure an unpacked package. With 
+
+-a (or --pending) = configures all packages
+requiring configuration
+
+-r = Remove a package (but leave its configuration files)
+
+-P = Purge – remove a package along with its configuration files
+
+--get-selections = Get a list of package selections 
+from a system (to stdout)
+
+--set-selections = Set the list of package selections for a system (from stdin)
+
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+# apt-cache search\show
+	\\ find info about available package stored in /var/cache/apt
+	
+	
+# apt-get update && install
+	\\ install package with dependencies
+
+
+# alien --to-rpm
+# alien --to-debian
+	\\ convert rpm-deb package

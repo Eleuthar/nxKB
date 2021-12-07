@@ -1,0 +1,84 @@
+
+ 1. Symmetric crypto: exchange shared secret key
+ 2. Asymmetric crypto: public & private key pair
+ 
+ 
+/etc/ssh/ssh_host_rsa_key
+/etc/ssh/ssh_host_dsa_key
+	\\ asymmetric private keys
+	
+
+/etc/ssh/ssh_host_rsa_key.pub
+/etc/ssh/ssh_host_dsa_key.pub
+	\\ asymmetric public keys
+	
+	
+/etc/ssh/ssh_known_hosts
+~/.ssh/known_hosts
+	\\ client side store of the server's public key
+	
+
+
+DIRECTIVE
+`````````````
+
+# vim /etc/sshd.config
+	\\ sshd = server, ssh = client
+	
+PermitRootLogin without-password
+PubkeyAuthentication yes
+UseDNS no
+	\\ avoid waiting for timeout when DNS is N\A
+	
+
+
+VALIDATE FingerPrint
+``````````````````````````
+	
+@target
+# ssh-keygen -t dsa|rsa
+
+
+# ssh-keyscan <IP|hostname>
+	\\ get remote host public keys
+ 
+ 
+# ssh-keygen -l -F <IP|hostname>
+	\\ generate fingerprint of remote host to compare with fingerprint from known_hosts
+	
+	
+# ssh -o [VisualHostKeys=yes] FingerprintHash=md5\sha256 <IP>
+	\\ display fingerprint in either format & optionally in visual format
+	
+
+# ssh <host> <cmd>
+	\\ run single cmd on host
+
+
+PWD-LESS LOGIN
+``````````````````````
+
+~/.ssh/authorized_keys
+	\\ located on the remote server, contains client public key copied by scp for ssh authentication:
+	* without password if the private key was created without passphrase
+	* with passphrase of private key
+
+# eval $(ssh-agent)
+# ssh-add
+	\\ ssh-agent reports env variable & can hold the passphrase and provide it automatically @ ssh login
+	
+	
+
+PORT FORWARDING
+~~~~~~~~~~~~~~~~
+
+# ssh -L <localPort>:<targetHost>:<remotePort> <tunnelHost>
+	\\ local: 
+	
+	
+# ssh -R <tunnelPort>:<localhost>:<localPort> <tunnelHost>
+	\\ reverse
+		
+	
+# ssh -X <localHost> <remoteXapp>
+	\\ X11 forwarding using remote sshd as proxy X server; DISPLAY variable is set to direct <remoteXapp> to the proxy server

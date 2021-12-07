@@ -1,0 +1,176 @@
+
+NIC CONFIG VIA IFCFG-<port> FILE
+`````````````````````````````````````````
+/etc/sysconfig/network-scripts/ifcfg-eth0
+
+	# STATIC IP CFG
+	NETWORKING=yes
+	HOSTNAME=mesa.domain.org
+	GATEWAY=192.168.1.254
+	DEVICE=eth0
+	BOOTPROTO=static|none
+	BROADCAST=192.168.1.255
+	IPADDR=192.168.1.108
+	PREFIX=24
+	NETMASK=255.255.255.0
+	ONBOOT=yes
+	DEFROUTE=no
+	
+
+	# DHCP
+	DEVICE=eth0
+	BOOTPROTO=dhcp
+	ONBOOT=yes
+	
+	
+$ /sbin/ifup eth0
+	\\ with DHCP ON
+
+
+
+NIC CONFIG VIA NETPLAN yml
+````````````````````````````````````
+network:
+	ethernets:
+		enp0s3:
+			dhcp4: true
+		enp0s8:
+			addresses: [192.168.55.xxx/24]
+	version: 2
+
+# netplan apply
+
+
+
+NIC CONFIG VIA CLI
+````````````````````````
+! non-persistent
+
+
+# /sbin/ifconfig eth0 <IP> netmask <mask>
+# /sbin/ifconfig eth0 up
+
+
+
+NETWORK SCRIPT
+``````````````````````
+
+/etc/rc.d/init.d/network
+	\\ all NIC are initialized here; reads /etc/sysctl.conf where is allowed IP forwarding in kernel, to act as gateway\router
+
+
+# /etc/rc.d/init.d/network start | stop | restart
+	\\ restart if /etc/sysconfig is updated, but will restart all NIC, while ifdown\ifup targets individual NIC
+
+
+
+ROUTING
+````````````
+
+!!! routes added below will not survive reboot, only those in /etc/sysconfig/network-scripts/route-ethX & static-routes
+
+
+# /sbin/route add -net <remoteNetwork> gw <GATEWAY> dev ethX
+	\\ add static route
+	
+
+# /sbin/route add default gw <GATEWAY> ethX
+	\\ add default GATEWAY
+
+
+# /sbin/route -n
+	\\ list routing table
+
+
+
+SUBNETTING
+````````````````
+
+2^X - 2 = maximum number of hosts, where X = number of host bits (32 - subnet mask nr.)
+
+
+
+CMD
+````````
+
+arp -a || ip neigh
+	\\ show ARP table
+
+
+arp -s <ip> <mac> || ip neigh add <ip> lladr <mac> dev ethX
+	\\ add ARP entry
+
+
+arp -i ethX -d <ip> || ip neigh del <ip> dev ethX
+	\\ delete ARP entry
+
+
+ifconfig ethX down\up || ip link set ethX down\up
+	\\ bring interface online\offline
+
+
+ip route get <ip>
+	\\ display route address
+
+
+ip route add <ip/mask> via <gateway>
+
+
+ip route add default via <ip> dev <interface>
+
+
+arping -I ethX <ip>
+	\\ send ARP request to IP via interface
+
+
+arping -D -I ethX <ip>
+	\\ check for duplicate MAC address at IP on interface
+
+
+ethtool -g ethX
+	\\ display buffer ring for ethX
+
+
+ethtool -i ethX
+	\\ display driver information for interface
+
+
+ethtool -S ethX
+	\\ display network & driver statistics on interface
+
+
+ethtool -p ethX
+	\\ make interface LED blink on network port
+
+	
+iwlist wlan0 sca
+
+
+nmcli dev wifi connect <name> password <password>
+
+
+
+TROUBLESHOOTING
+`````````````````````````
+
+1. NIC
+2. IP config
+3. Router ping
+4. Firewall
+5. Connection to ISP
+6. Ping target
+7. DNS config & lookup
+
+
+# ifconfig ethX
+# ping -c <GATEWAY>
+/etc/resolv.conf
+# ping <DNS server>
+# dig www.lpi.org OR nslookup www.lpi.org
+# service <serviceName> status
+# ps -ef | grep <serviceName>
+# netstat -ant OR lsof -i
+	\\ running service listens on the expected port?
+# iptables -F
+	\\ flush FW rules; briefly disable firewall to check if still blocking, re-enable immediately!
+# traceroute <IP> OR tracepath <IP>

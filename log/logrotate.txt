@@ -1,0 +1,19 @@
+# vi /etc/logrotate.conf
+	<regex for *log> {
+		size 100M 		\\ max log size 
+			XOR weekly
+		rotate 4
+		compress
+		delaycompress 		\\ keep current & previous week unzipped; zip rest
+		
+
+# /var/spool/cron/<uzr>
+	\\ non-privileged user defined cron job
+	
+
+# /etc/crontab
+	\\ can define job by root for any uzr
+	
+	
+# more /var/lib/logrotate/logrotate.status
+	\\ logrotate tracker
