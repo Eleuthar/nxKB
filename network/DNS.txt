@@ -1,6 +1,13 @@
+FLOW
+````````
+recursive then iterative
+local cache \ hosts > local DNS > root domain server (point to .com domain server)
+				> Com domain server (point to <domain>.com DNS server)
+				> <domain>.com dns server gives the IP address
+
 
 LOCAL DNS
-``````````````
+`````````````
 
 1. /etc/hosts
 	\\ static lookup, <ip>	<hostname> mapping
