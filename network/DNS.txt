@@ -3,12 +3,13 @@ LOCAL DNS
 ``````````````
 
 1. /etc/hosts
-	\\ <ip>	<hostname> mapping
+	\\ static lookup, <ip>	<hostname> mapping
 	\\ immediate effect, no need to reload svc or cfg
-	
+		
 	
 2. /etc/resolv.conf
 	\\ dynamic <hostname> <ip> mapping, DO NOT EDIT
+	\\ if DHCP, automatically populated
 	
 	
 3. /etc/nsswitch.conf
