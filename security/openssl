@@ -1,0 +1,63 @@
+HANDSHAKE PROTOCOL
+``````````````````````
+Q --> ClientHello containing a list of items supported by the client: 
+    * SSL\TLS version
+    * Cryptographic algorithms
+    * Data compression methods
+    
+Z --> ServerHello:
+    * Crypto algo from client list, chosen by server
+    * Session ID
+    * Digital cert
+    * Public key
+    
+Q --> verify CA & ClientKeyExchange
+    * share secret symmetric key using Z public key
+    * send Finished txt encrypted with new secret key
+ 
+Z --> send Finished txt to client, encrypted with symmetric key, to indicate handshake is complete
+
+
+
+DIGITAL SIGNATURE FLOW
+````````````````````````
+Q write plaintext & attach certificate to digitally signed text
+    > create digest of the text for integrity 
+        > encrypt digest with private key == digital signature
+            > send plaintext & digital signature
+            
+Z decrypts digest with Q.public key, if fail, text is not from Q.
+    > create digest of plaintext with hash algorithm
+        > compare both digest, if fail, the plaintext is changed in transit
+
+
+
+DIGITAL CERTIFICATE FLOW
+```````````````````````````
+Q send req for Z
+    > Z reply with public key & SSL cert
+        > Q check CA digital signature
+            > Q generate symmetric key (shared secret), encrypts with Z public key & send it to Z
+                > Z decrypts symmetric key and continues communication using only the shared key
+
+
+
+SIGNING
+````````
+# openssl genrsa 1024 > domain.demo.key
+  \\ generate private key
+  
+  
+# openssl req -new -key domain.demo.key > domain.demo.csr
+  \\ generate certificate signing request filled with: country 2 char, state, locality, org name, org unit, common name, email
+  
+  
+# openssl x509 -in domain.demo.csr -out domain.demo.cert -req -signkey domain.demo.key -days 365
+  \\ generate self signed certificate
+  
+  ELSE
+  
+* navigate to the web enrollment URL of our CA server
+* request cert, paste CSR content into Base-64-encoded cert request.
+* download either cert format
+  \\ generate certificate signed by a CA
