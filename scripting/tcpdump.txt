@@ -1,0 +1,59 @@
+tcpdump -D
+	\\ display network interfaces
+
+
+tcpdump -i any -c 5 -n -s96 "host $IP \
+	and (port 80 or port 443)"
+
+	\\ listen all interfaces to port 80
+	\\ -c = packet count
+	\\ -n = prevent DNS resolution
+	\\ -s = set maximum packet size to 96 byte
+
+
+tcpdump -i eth0 -n -c100 "src net 192.168.0.0./16 \
+	and not dst net 192.168.0.0/16 and not dst net 10.0.0.0/8"
+
+	\\ network filtering
+
+
+tcpdump -i eth0 ether host $MAC -n -e
+
+	\\ capture only to OR from this MAC
+	\\ -e = view MAC in capture, default not visible
+
+
+tcpdump -i any "tcp[tcpflags] & tcp-syn != 0" -A
+	
+	\\ capture only SYN flag
+	\\ same applies to all other flag
+	\\ ASCII data
+
+
+
+TCP flag
+`````````````
+	- SYN = only the 1st packet from sender\receiver should have this flag
+
+	- Urgent Pointer = deliver data out of sequence immediately
+
+	- ACK = packet received by client, must contain an valid acknowledgement number
+
+	- PUSH = immediately send segment to network layer when received signal from app layer, instead of buffering until it reaches maximum segment size
+
+	- RST (reset) = terminate connection if faulty TCP connection OR unexpected conversation
+
+	- FIN = connection termination sent by sender
+
+
+
+
+ANALYSIS
+```````````
+wscale = 7 aka 2^7; win value multiplied with wscale
+
+-t = remove timestamp
+
+-ttt = time diff between consecutive output; @spike
+
+-ttttt = time from the 1st packet; @overall transaction
