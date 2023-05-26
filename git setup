@@ -27,3 +27,7 @@ $ git rebase main
 
 $ git checkout -b <new-branch>
     \\ make & switch to new working branch
+
+$ git add .
+$ git commit -m "change comment"
+$ git push
