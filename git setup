@@ -3,3 +3,15 @@ $ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 $ eval "$(ssh-agent -s)"
 $ ssh-add ~/.ssh/<qname>
 $ ssh -T git@github.com
+
+
+REPO MANAGEMENT
+`````````````````
+$ git branch
+    \\ current branch marked by asterisk
+
+$ git checkout main
+    \\ switch to master before working
+    
+$ git pull
+    \\ refresh main branch
