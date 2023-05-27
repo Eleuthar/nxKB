@@ -1,2 +1,7 @@
 #87CEA1 green
 #E9C097 amber
+#02005B dark blue
+#EEE8D5 beige
+
+
+$ dconf write /org/gnome/terminal/legacy/profiles:/:0f8f24bd-7cb1-448b-ad46-f2accc7d1d7b/font "'Cascadia Mono Semibold 15'"
