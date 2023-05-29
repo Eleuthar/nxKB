@@ -1,0 +1,40 @@
+
+802.1q
+Logical segmentation of a broadcast domain without using physical devices like router || multilayer switch
+
+
+
+STATIC VS DYNAMIC
+``````````````````
+STATIC VLAN = port based
+
+DYNAMIC VLAN = MAC (or even IP) address based
+	\\ requires a central server = VLAN Member Policy Server (VMPS)
+	\\ VMPS holds the MAC - VLAN mapping
+
+Trunking (tagging < non-CISCO) permits traversing traffic between physical switches \ VLANs via trunk port which expects tagged traffic.
+
+Tag frame holds VLAN Identifier ranged 1-4094.
+
+
+
+Default vs Native
+``````````````````
+DEFAULT - VLAN 1 
+	\\ is mapped to an access port not assigned to any VLAN
+	\\ cannot be deleted\changed
+
+NATIVE
+	\\ traffic traverses trunk without tag
+	\\ default native is VLAN 1 but can be changed
+	\\ should be the same on both trunk ends
+
+
+
+VLAN Trunking Protocol
+```````````````````````
+VTP servers synchronize VLAN configurations of switches based on VTP Domain.
+Can send summary advertisements every 5 minutes by default.
+VTP Pruning prevent unnecessary traffic toward non-concerned switches.
+
+
