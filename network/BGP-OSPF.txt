@@ -1,0 +1,26 @@
+
+Autonomous System (AS)
+```````````````````````
+* A network of routers using the same logic and policy owned by a single entity (company\ISP\government) aka backbone of the internet
+
+* Each AS is granted a unique AS number by IANA - a unique 16-bit number
+(~100k globally)
+
+* Each AS has interior routers and an ASBR (border router) that hold a list of paths to other AS.
+
+* Each AS is segmented into Areas connected to each other via Area Border Routers acting as a bridge.
+
+* Interior routers are subjected to IGP (internal gateway protocol) and EGP (exterior routing protocol)
+
+* DR (Designated Router) exchanges info with other area routers via LSA 
+	\\ New router joins an AS & sends LSA (Link State Advertisements)
+
+* IGP use:
+	\\ Distance Vector = RIPv1, RIPv2, IGRP
+	\\ Link State = OSPF, IS-IS (intermediate system)
+	\\ Hybrid = EIGRP
+
+* EGP use:
+	\\ Path Vector = BGP
+
+

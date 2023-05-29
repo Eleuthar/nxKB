@@ -1,0 +1,20 @@
+
+Extends IPv4 with error reporting and error correcting mechanism.
+
+
+ICMP error reporting code
+``````````````````````````
+03 = Destination unreachable
+04 = Source quench
+05 = Redirection \\ tell host to send traffic directly to redirect target
+11 = Time exceeded \\ on TTL == 0
+12 = Parameter problem
+
+
+ICMP query msg
+```````````````
+08 = Echo request
+00 = Echo reply
+13 = Timestamp request
+14 = Timestamp reply
+

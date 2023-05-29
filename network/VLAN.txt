@@ -38,3 +38,10 @@ Can send summary advertisements every 5 minutes by default.
 VTP Pruning prevent unnecessary traffic toward non-concerned switches.
 
 
+
+EVPN-VXLAN
+```````````
+Successor to VPLS (Virtual Private LAN Service) - extension to BGP
+
+
+
