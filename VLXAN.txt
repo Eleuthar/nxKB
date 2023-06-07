@@ -1,0 +1,8 @@
+EVPN uses BGP routes to enable MAC learning & advertisement (within control plane - how data is) like it would handle routing tables, to enable load balancing between EVPN routes with the same MAC destination but different next hops.
+
+VXLAN replaces directly connected trunk links with VTEP UDP tunnels (VXLAN tunnel endpoint) that provide similar functionality, based on an interior routing protocol - OSPF.
+
+UDP is used to support ECMP (equal cost multi-path routing) to increase bandwidth by loadbalancing traffic over multiple paths.
+
+VTEP tunnel permits broadcasting based on VNID (virtual network ID) - a LAN connected by VTEP - by VXLAN bridging.
+
