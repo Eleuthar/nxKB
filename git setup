@@ -6,28 +6,64 @@ $ ssh -T git@github.com
 
 
 REPO MANAGEMENT
-`````````````````
-$ git branch
-    \\ current branch marked by asterisk
-
-$ git checkout main
-    \\ switch to master before working
-    
+`````````````````    
 $ git pull
     \\ refresh main branch
-
-$ git checkout <working-branch>
-    \\ switch back to working branch
     
-$ git pull
-    \\ update working branch
-
-$ git rebase main
-    \\ update working branch from main
-
-$ git checkout -b <new-branch>
-    \\ make & switch to new working branch
-
 $ git add .
 $ git commit -m "change comment"
+
+$ git branch -v
+    \\ show all branches, current branch marked by asterisk    
+    
+$ git checkout <branch>
+    \\ switch to branch
+    OR
+$ git checkout -b <branch>
+	\\ make & switch to new branch
+    
+$ git rebase main
+    \\ level branch on top of main
+    
+$ git checkout main
+	\\ move to main branch
+	
+$ git rebase <branch>
+	\\ merge branch with main, rewrite history
+	
 $ git push
+
+
+SQUASH
+````````
+Convert N commits into 1
+
+$ git checkout <branch>
+$ git rebase -i HEAD~3
+	\\ operate on the last 3 commits back from HEAD
+	\\ replace 'pick' with 'squash' on commit target, then refactor the commit message by commenting '#'
+
+
+BISECT
+````````
+Mark commits as bad or good to narrow down the exact version a bug was introduced.
+
+$ git log
+
+$ get bisect start
+
+$ git bisect good <commit ID>
+	\\ mark commit as good
+	
+$ git bisect bad <commit ID>
+	\\ mark commit as bad
+	
+$ git bisect reset
+	\\ switch to the last working branch, default name "new-bisect"
+
+$ git show <bad commit>
+	\\ view changes of bugged commit
+
+$ git revert <bad commit>
+
+

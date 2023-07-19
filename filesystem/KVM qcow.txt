@@ -1,0 +1,89 @@
+INSTALL
+~~~~~~~~
+sudo apt install qemu-system-x86
+kvm-ok
+sudo apt -y install bridge-utils cpu-checker libvirt-clients libvirt-daemon qemu qemu-kvm
+sudo apt install qemu-utils
+sudo chown username:username /var/run/libvirt/libvirt-sock
+
+
+RESET ROOT PWD
+~~~~~~~~~~~~~~~~
+1. Restart & "E"dit grub bootloader
+2. replace "rhgb quiet" with init=/bin/bash (no quote), CTRL+X
+3. Check the status of the root partition: # mount | grep root
+4. # mount -o remount,rw /
+5. passwd << There!$N05poon
+6. Reboot
+!!! If you get ErrorException on web GUI, run the command:
+# fwconsole ma upgrade dashboard –edge
+
+
+CHROOT
+~~~~~~~~
+1. sudo modprobe nbd max_part=8
+2. sudo qemu-nbd --connect=/dev/nbd0 ./VMAX.qcow2
+3. sudo lvdisplay
+	ROOT_PATH = /dev/SangomaVG/root
+	ROOT_UUID = KXscFu-QnwH-PeP7-BS2c-njqf-ydNT-aVT5ah
+	
+	nbd0                                                                          
+	├─nbd0p1
+	│    ext4   1.0   bootvol
+	│                       3e42945e-9e79-4461-b326-f823546fbeb3                  
+	└─nbd0p2
+		 LVM2_m LVM2        1FltwP-ocBa-3FbU-go2F-D7HZ-pil7-61bLyw                
+	  ├─SangomaVG-root
+	  │  xfs                a8dd6225-a067-49f6-8175-3b22261c268e                 
+	  └─SangomaVG-swaplv1
+		 swap   1           8b81726a-9297-459e-a393-8a679e2c9f44
+
+4. mount $ROOT_PATH /mnt/<POINT>
+5. passwd << There!$N05poon
+6. umount /mnt/<POINT/
+7. qemu-nbd --disconnect /dev/nbd0
+8. rmmod nbd
+
+GRUB 19.1
+3e42-945e-9e79-4461-b326-f823546fbeb3
+
+dracut --regenerate-all -f && grub2-mkconfig -o /boot/grub2/grub.cfg
+sudo update-initramfs -c -k $(uname -r)
+
+https://forums.centos.org/viewtopic.php?t=60164
+https://wiki.centos.org/TipsAndTricks/CreateNewInitrd
+
+
+
+Virtio
+``````````
+<disk type='file' device='disk'>
+      <driver name='qemu' type='qcow2'/>
+      <source file='/srv/storage/images/kerio_control.img'/>
+      <target dev='vda' bus='virtio'/>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x04' function='0x0'/>
+    </disk>
+    
+    
+NIC
+`````````
+<interface type='bridge'>
+  <mac address='52:54:00:11:c4:3b'/>
+  <source bridge='br0'/>
+  <target dev='vnet2'/>
+  <model type='virtio'/>
+  <alias name='net0'/>
+  <address type='pci' domain='0x0000' bus='0x00' slot='0x03' function='0x0'/>
+</interface>
+
+TO 
+
+<interface type='bridge'>
+      <mac address='52:54:00:11:c4:3b'/>
+      <source bridge='br0'/>
+      <target dev='vnet2'/>
+      <model type='e1000'/>
+      <alias name='net0'/>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x03' function='0x0'/>
+</interface>
+

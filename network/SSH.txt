@@ -82,3 +82,11 @@ PORT FORWARDING
 	
 # ssh -X <localHost> <remoteXapp>
 	\\ X11 forwarding using remote sshd as proxy X server; DISPLAY variable is set to direct <remoteXapp> to the proxy server
+	
+	
+COPY
+~~~~~~
+# scp <uzr>@<IP>:<path> <destination>
+
+# rsync -P --rsh=ssh <uzr>@<IP>:<path> <destination>
+	\\ resume interupted download
