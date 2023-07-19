@@ -6,7 +6,9 @@ $ ssh -T git@github.com
 
 
 REPO MANAGEMENT
-`````````````````    
+`````````````````
+$ git init
+$ git remote add <alias> <url>
 $ git pull
     \\ refresh main branch
     
