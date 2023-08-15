@@ -13,6 +13,9 @@ set clipboard=unnamedplus
 |     Basic Usage     |
 ***********************
 
+v > "+y
+	\\ copy to clipboard
+
 p
 	\\ Paste the clipboard contents.
 
