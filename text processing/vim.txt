@@ -5,6 +5,8 @@ colorscheme delek
 set autoindent
 set linenumber
 set ts=4 sw=4
+set clipboard=unnamedplus
+
 
 
 ***********************
