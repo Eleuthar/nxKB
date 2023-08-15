@@ -1,3 +1,10 @@
+apt-get install vim-gtk3
+vim ~/.vimrc
+set title
+colorscheme delek
+set autoindent
+set linenumber
+set ts=4 sw=4
 
 
 ***********************
