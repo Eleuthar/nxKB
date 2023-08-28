@@ -1,8 +1,20 @@
+apt-get install vim-gtk3
+vim ~/.vimrc
+set title
+colorscheme delek
+set autoindent
+set linenumber
+set ts=4 sw=4
+set clipboard=unnamedplus
+
 
 
 ***********************
 |     Basic Usage     |
 ***********************
+
+v > "+y
+	\\ copy to clipboard
 
 p
 	\\ Paste the clipboard contents.
