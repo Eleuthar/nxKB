@@ -69,3 +69,14 @@ $ git show <bad commit>
 $ git revert <bad commit>
 
 
+SPARSE CHECKOUT
+`````````````````
+$ mkdir <repo>
+$ cd <repo>
+$ git init
+$ git remote add -f origin <url>
+$ git config core.sparseCheckout true
+$ echo "<dir path>" >> .git/info/sparse-checkout
+$ git pull origin main
+
+
