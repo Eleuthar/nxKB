@@ -1,0 +1,59 @@
+{
+    "workbench.colorCustomizations": {
+        "editor.background":"#1f282d",
+        "terminal.background": "#1c1b24"
+    },
+    "editor.tokenColorCustomizations": {
+        "textMateRules": [
+            {
+                "scope": [
+                    "comment",
+                    "punctuation.definition.comment",
+                    "string.quoted.docstring",
+                    "Keyword",
+                    "Storage",
+                    "keyword.control",
+                    "variable.language",
+                    "entity.name.method.js",
+                    "entity.other.attribute-name",
+                    "tag.decorator.js entity.name.tag.js",
+                    "tag.decorator.js punctuation.definition.tag.js",
+                    "source.js constant.other.object.key.js string.unquoted.label.js",
+                    "markup.italic",
+                    "markup.quote",
+                    "comment",
+                    "punctuation.definition.comment",
+                    "string.quoted.docstring",
+                    "markup.bold",
+                    "markup.bold string",
+                    "markup.bold markup.italic",
+                    "markup.italic markup.bold",
+                    "markup.quote markup.bold",
+                    "markup.bold markup.italic string",
+                    "markup.italic markup.bold string",
+                    "markup.quote markup.bold string",
+                    "meta.separator"
+            ],
+                "settings": {
+                    "fontStyle": ""
+                }
+            }
+        ]
+    },
+    "terminal.integrated.fontFamily": "Consolas",
+    "terminal.integrated.fontSize": 17,
+    "terminal.integrated.letterSpacing": 2,
+    "editor.fontFamily": "'Ubuntu Mono', Consolas",
+    "editor.fontSize": 19,
+    "security.workspace.trust.untrustedFiles": "open",
+    "editor.letterSpacing": 0.8,
+    "editor.lineHeight": 1.5,
+    "editor.cursorSmoothCaretAnimation": "on",
+    "editor.cursorBlinking": "solid",
+    "editor.cursorStyle": "block-outline",
+    "editor.renderLineHighlight": "gutter",
+    "editor.occurrencesHighlight": false,
+    "workbench.colorTheme": "Community Material Theme",
+    "terminal.integrated.sendKeybindingsToShell": true,
+    "terminal.integrated.tabStopWidth": 4
+}
