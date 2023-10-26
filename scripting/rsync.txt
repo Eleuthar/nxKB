@@ -1,0 +1,6 @@
+rsync --dry-run <host> <target>
+  \\ simulator
+
+rsync -rv <target> <host>
+  \\ reversed recursive sync, to restore data on the host
+
