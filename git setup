@@ -5,6 +5,10 @@ $ ssh-add ~/.ssh/<qname>
 $ ssh -T git@github.com
 
 
+git clone -c core.sshCommand="/usr/bin/ssh -i /home/me/.ssh/id_rsa_foo" git@github.com:me/repo.git
+
+
+
 REPO MANAGEMENT
 `````````````````
 $ git init
