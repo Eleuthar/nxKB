@@ -1,3 +1,10 @@
 #87CEA1, #9AF1BA < green
 #02005B < dark blue
 #ffebcd, #f5deb3, #ffe4c4, EEE0C7 < beige
+
+
+# /usr/share/cinnamon/theme/cinnamon.css
+.grouped-window-list-box {
+    spacing: 5px;
+}
+
