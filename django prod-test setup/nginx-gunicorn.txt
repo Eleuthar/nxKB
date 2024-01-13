@@ -55,6 +55,8 @@ EnvironmentFile=/etc/geofleet/gunicorn.env
 #EnvironmentFile=/var/www/geo/env_mail.sh \\ optional, loaded manually if needed
 WorkingDirectory=/var/www/geo/
 ExecStart=/var/www/geo/vnv/bin/gunicorn --bind 127.0.0.1:8000 --workers 2 <project>.wsgi:application
+    OR
+ExecStart=/var/www/geo/vnv/bin/gunicorn --config /etc/geofleet/gun <project>.wsgi:application
 ExecReload=/bin/kill -s HUP $MAINPID
 `````````````````````````````````````````
 
