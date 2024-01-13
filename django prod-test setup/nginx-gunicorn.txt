@@ -1,0 +1,97 @@
+INDEX
+``````
+1. package install
+2. config nginx web server
+3. config gunicorn http server
+
+    
+~~~~~~~~~~~~~~~~~~~~~
+1. prerequisite setup
+~~~~~~~~~~~~~~~~~~~~~
+
+$ useradd -m -s /bin/bash -G sudo <appUzr>
+$ visudo
+    > %sudo   ALL=(ALL:ALL) NOPASSWD:ALL
+$ su <appUzr>
+$ sudo apt-get install nginx
+$ (venv) pip install gunicorn
+
+    
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2. config nginx web server
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+$ vim /etc/nginx/sites-available/domain.net
+````````````````````````````````````````````
+server {
+    listen 80;
+    server_name test.geofleet.ro;
+    location /static/ {
+        alias /var/www/geo/static/;
+    }
+    location / {
+        proxy_pass http://localhost:8000;
+        include /etc/nginx/proxy_params;
+    }
+}
+````````````````````````````````````````````
+
+# enable site
+cd /etc/nginx/sites-enabled
+ln -s /etc/nginx/sites-available/domain.net
+
+
+$ touch /etc/systemd/system/<app>.service
+$ systemctl edit --full geofleet.service
+`````````````````````````````````````````
+[Unit]
+Description=Geofleet
+
+[Service]
+Type=simple
+User=geodev
+Group=geodev
+EnvironmentFile=/etc/geofleet/gunicorn.env
+#EnvironmentFile=/var/www/geo/env_mail.sh \\ optional, loaded manually if needed
+WorkingDirectory=/var/www/geo/
+ExecStart=/var/www/geo/vnv/bin/gunicorn --bind 127.0.0.1:8000 --workers 2 <project>.wsgi:application
+ExecReload=/bin/kill -s HUP $MAINPID
+`````````````````````````````````````````
+
+$ systemctl daemon-reload
+$ nginx -t
+$ systemctl status \ start <app>.service
+$ ps auxwwf | less
+
+    
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+3. config gunicorn http server
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    
+$ vim /etc/<app>/gunicorn.conf.py 
+    \\ not mandatory, can be replaced by systemd service file kwarg
+``````````````````````````````````
+workers = 3
+syslog = True
+bind = '127.0.0.1:8000'
+accesslog = "/var/log/gunicorn/access.log"
+errorlog = "/var/log/gunicorn/error.log"
+capture_output = True
+pidfile = "/var/run/gunicorn/dev.pid"
+daemon = True
+loglevel = "info"
+user = "geodev"
+group = "geodev"
+``````````````````````````````````
+
+$ vim /etc/<app>/gunicorn.env
+``````````````````````````````
+DJANGO_SETTINGS_MODULE=<project>.prod
+SECRET_KEY=''
+DB_NAME=''
+DB_UZR=''
+DB_PVD=''
+EMAIL_HOST="smtp.gmail.com"
+EMAIL_UZR=''
+EMAIL_PVD=''
+```````````````````````````````
