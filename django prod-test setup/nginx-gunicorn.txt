@@ -82,11 +82,7 @@ bind = '127.0.0.1:8000'
 accesslog = "/var/log/gunicorn/access.log"
 errorlog = "/var/log/gunicorn/error.log"
 capture_output = True
-pidfile = "/var/run/gunicorn/dev.pid"
-daemon = True
 loglevel = "info"
-user = "geodev"
-group = "geodev"
 ``````````````````````````````````
 
 $ vim /etc/<app>/gunicorn.env
