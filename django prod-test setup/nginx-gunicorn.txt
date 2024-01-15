@@ -28,6 +28,9 @@ server {
     server_name test.geofleet.ro;
     location /static/ {
         alias /var/www/geo/static/;
+	    add_header Cache-Control 'no-cache, no-store, must-revalidate';
+		add_header Pragma 'no-cache';
+		expires 0;
     }
     location / {
         proxy_pass http://localhost:8000;
