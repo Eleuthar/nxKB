@@ -102,6 +102,6 @@ EMAIL_PVD=''
 Permission check for static 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-$ sudo grep user /nginx/nginx.conf
+$ sudo grep user /etc/nginx/nginx.conf
 $ stat <all directories to static dir>
 $ sudo chmod 751 <forbidden dir>
