@@ -10,8 +10,24 @@ apt-get install libpq-dev python3-dev
 ~~~~~~~~~~~~~
 $ sudo su postgres
 $ psql <db>
+$ create database xxx template template0;
 $ CREATE USER xxx_adm WITH ENCRYPTED PASSWORD '~~~~~~~'; 
 $ ALTER ROLE xxx_adm SET client_encoding TO 'utf8';
 $ ALTER ROLE xxx_adm SET default_transaction_isolation TO 'read committed';
 $ ALTER ROLE xxx_adm SET timezone TO 'UTC'; 
 $ GRANT ALL PRIVILEGES ON DATABASE xxx_db TO xxx_adm;
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+3. STOP DB with active connection
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+SELECT * FROM pg_stat_activity WHERE datname = 'geofleet_db';
+
+SELECT	pg_terminate_backend (pid)
+FROM	pg_stat_activity
+WHERE	pg_stat_activity.datname = 'geofleet_db';
+DROP DATABASE geofleet_db;
+
+SELECT pg_terminate_backend (pid)
+FROM pg_stat_activity WHERE datname = 'db';
