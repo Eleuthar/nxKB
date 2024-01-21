@@ -22,12 +22,13 @@ $ GRANT ALL PRIVILEGES ON DATABASE xxx_db TO xxx_adm;
 3. STOP DB with active connection
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-SELECT * FROM pg_stat_activity WHERE datname = 'geofleet_db';
+SELECT * FROM pg_stat_activity WHERE datname = 'xxx';
 
 SELECT	pg_terminate_backend (pid)
 FROM	pg_stat_activity
-WHERE	pg_stat_activity.datname = 'geofleet_db';
-DROP DATABASE geofleet_db;
+WHERE	pg_stat_activity.datname = 'xxx';
 
-SELECT pg_terminate_backend (pid)
-FROM pg_stat_activity WHERE datname = 'db';
+DROP DATABASE xxx;
+
+SELECT pg_terminate_backend (pid) 
+FROM pg_stat_activity WHERE datname = 'xxx';
