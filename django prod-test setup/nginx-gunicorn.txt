@@ -26,6 +26,8 @@ $ vim /etc/nginx/sites-available/domain.net
 server {
     listen 80;
     server_name test.geofleet.ro;
+	client_max_body_size 100M;
+
     location /static/ {
         alias /var/www/geo/static/;
 	    add_header Cache-Control 'no-cache, no-store, must-revalidate';
