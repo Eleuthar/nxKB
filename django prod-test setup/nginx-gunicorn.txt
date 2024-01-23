@@ -34,7 +34,12 @@ server {
 		add_header Pragma 'no-cache';
 		expires 0;
     }
-    location / {
+
+	location /media/ {
+        alias /var/www/geo/media/;
+    }
+
+	location / {
         proxy_pass http://localhost:8000;
         include /etc/nginx/proxy_params;
     }
