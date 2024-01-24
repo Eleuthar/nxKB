@@ -1,4 +1,4 @@
-~~~~~~~~~~~~~~~~~~~~
+3~~~~~~~~~~~~~~~~~~~~
 1. package install
 ~~~~~~~~~~~~~~~~~~~~
 apt-get install postgresql postgresql-contrib
@@ -24,11 +24,15 @@ $ GRANT ALL PRIVILEGES ON DATABASE xxx_db TO xxx_adm;
 
 SELECT * FROM pg_stat_activity WHERE datname = 'xxx';
 
-SELECT	pg_terminate_backend (pid)
-FROM	pg_stat_activity
-WHERE	pg_stat_activity.datname = 'xxx';
-
-DROP DATABASE xxx;
-
 SELECT pg_terminate_backend (pid) 
 FROM pg_stat_activity WHERE datname = 'xxx';
+
+
+~~~~~~~~~~~~~~
+4. MGMT CMD
+~~~~~~~~~~~~~~
+
+\d table_name
+  \\ show table structure
+
+
