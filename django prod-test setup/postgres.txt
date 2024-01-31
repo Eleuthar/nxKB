@@ -10,7 +10,7 @@ apt-get install libpq-dev python3-dev
 ~~~~~~~~~~~~~
 $ sudo su postgres
 $ psql <db>
-$ create database xxx template template0;
+$ create database xxx;
 $ CREATE USER xxx_adm WITH ENCRYPTED PASSWORD '~~~~~~~'; 
 $ ALTER ROLE xxx_adm SET client_encoding TO 'utf8';
 $ ALTER ROLE xxx_adm SET default_transaction_isolation TO 'read committed';
