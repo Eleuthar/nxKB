@@ -112,3 +112,15 @@ Permission check for static
 $ sudo grep user /etc/nginx/nginx.conf
 $ stat <all directories to static dir>
 $ sudo chmod 751 <forbidden dir>
+
+
+~~~~~~~~~~~~~~~~~~
+  SSL CERTIFICATE
+~~~~~~~~~~~~~~~~~~
+
+# mkdir /etc/nginx/certificate
+# cd /etc/nginx/certificate
+# openssl req -new -newkey rsa:4096 -x509 -sha256 -days 365 -nodes -out nginx-certificate.crt -keyou
+t nginx.key
+# systemctl restart nginx
+
