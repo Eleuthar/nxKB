@@ -23,27 +23,42 @@ $ (venv) pip install gunicorn
 
 $ vim /etc/nginx/sites-available/domain.net
 ````````````````````````````````````````````
+server {	
+	listen 80;
+	listen [::]:80;
+	server_name test.geofleet.ro www.test.geofleet.ro;
+	return 302 https://$server_name$request_uri;
+}
 server {
-    listen 80;
-    server_name test.geofleet.ro;
+	server_name test.geofleet.ro;
 	client_max_body_size 100M;
+	listen 443 ssl;
+    listen [::]:443 ssl;
+	ssl_certificate /etc/nginx/certificate/nginx-certificate.crt;
+	ssl_certificate_key /etc/nginx/certificate/nginx.key;
+	ssl_session_timeout 1d;
+	ssl_session_cache shared:SSL:50m;
+	ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+	ssl_ciphers  ECDHE+AES128:RSA+AES128:ECDHE+AES256:RSA+AES256:ECDHE+3DES:RSA+3DES:!MD5;
+	ssl_prefer_server_ciphers   on;
 
-    location /static/ {
-        alias /var/www/geo/static/;
-	    add_header Cache-Control 'no-cache, no-store, must-revalidate';
+	location /static/ {
+		alias /var/www/geo/static/;
+		add_header Cache-Control 'no-cache, no-store, must-revalidate';
 		add_header Pragma 'no-cache';
 		expires 0;
-    }
+	}
 
 	location /media/ {
-        alias /var/www/geo/media/;
-    }
+		alias /var/www/geo/media/;
+	}
 
 	location / {
-        proxy_pass http://localhost:8000;
-        include /etc/nginx/proxy_params;
-    }
+		proxy_pass http://127.0.0.1:8000;
+		include	/etc/nginx/proxy_params;
+	}
 }
+
 ````````````````````````````````````````````
 
 # enable site
