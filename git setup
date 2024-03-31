@@ -1,3 +1,6 @@
+\\ find files not belonging to user "foo" 
+$ find . \! -user foo -print
+
 \\ git object empty
 $ rm -rf .git/objects/* .git/refs/heads/* .git/refs/remotes/* .git/refs/stash .git/refs/tags/*
 $ git pull
