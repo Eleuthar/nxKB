@@ -50,6 +50,6 @@ FROM pg_stat_activity WHERE datname = 'xxx';
 ~~~~~~~~~~~~~~~~~~~~
 
 # docker client img
-docker run --name posgres-client -it --rm postgres psql -h <IP> -U <dbUzr>
+docker run --name postgres-client -it --rm postgres psql -h <IP> -U <dbUzr>
 
 
