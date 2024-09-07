@@ -44,20 +44,48 @@ Q send req for Z
 
 SIGNING
 ````````
-# openssl genrsa 1024 > domain.demo.key
-  \\ generate private key
-  
-  
-# openssl req -new -key domain.demo.key > domain.demo.csr
-  \\ generate certificate signing request filled with: country 2 char, state, locality, org name, org unit, common name, email
-  
-  
-# openssl x509 -in domain.demo.csr -out domain.demo.cert -req -signkey domain.demo.key -days 365
-  \\ generate self signed certificate
-  
-  ELSE
-  
-* navigate to the web enrollment URL of our CA server
-* request cert, paste CSR content into Base-64-encoded cert request.
-* download either cert format
-  \\ generate certificate signed by a CA
+
+\\ initial self signed root CA
+\\ -nodes == DO NOT encrypt private key with pvd 
+$ openssl req -new -x509 -sha256 -nodes -days 3650 -newkey rsa:2048 -keyout  privateKey.key -out certificate.crt
+
+
+\\ sign intermediate SERVER CSR
+$ openssl x509 -req -days 9999 -in server-csr.pem -CA ca-crt.pem -CAkey ca-key.pem -CAcreateserial -out server-crt.pem
+
+
+\\ export client cert
+$ openssl pkcs12 -export -inkey user.key -in user.pem -certfile user.pem -out testkeystore.p12
+
+
+\\ export public key
+openssl x509 -in certificate.pem -pubkey -noout > public_key.pem
+
+
+\\ generate CLIENT key + csr
+$ openssl req -new -newkey rsa:2048 -subj "/CN=YOUR_NAME/" -keyout uzr.key -out uzr.csr -nodes -sha256
+
+
+\\ sign CLIENT certificate
+$ openssl x509 -CA THEIR_CA_ROOT.crt -CAkey THEIR_CA_PRIVATE.key -req -in YOUR_REQUEST.csr -out YOUR_CERTIFICATE.crt -days 3650
+
+
+\\ verify
+$ openssl verify -CAfile ca-crt.pem client1-crt.pem
+
+
+\\ view cert signer
+$ openssl x509 -in pubcert.pem -noout -issuer -issuer_hash
+
+
+\\ view cert hash value
+$ openssl x509 -hash -in pubcert.pem -noout
+
+
+
+@nginx
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ssl_client_certificate /path/to/ca.pem;
+ssl_verify_client on
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
