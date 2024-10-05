@@ -31,4 +31,8 @@ $ gpg --encrypt --sign --armor --recipient <otherUzr> secret.txt
 	\\ encrypt & sign the message by hashing the content and encrypt with private key
 
 
+$ echo "<kex> <b64>" | ssh-keygen -lf /dev/stdin -E sha256
+	\\ return sha256 signature
+
+
 
