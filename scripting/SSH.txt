@@ -1,0 +1,15 @@
+# copy to remote host
+scp -p {USER}@{jumpHost}:/tmp/${customer}_include_CMDB_body.rules /tmp/${customer}_include_CMDB.lookup /tmp/${customer}_include_CMDB_header.rules ${USER}@${jumpHost}:/tmp
+    
+
+# tunnel copy via jump host
+scp -p -o ProxyCommand='ssh ${USER}@192.168.46.163 nc 139.188.158.25 22' <src> <dst>
+    
+
+# tunnel command via jump host using specific key
+ssh -i ~/.ssh/id_ed25519 -t -o ProxyCommand='ssh ${USER}@${jumpHost} nc ${ProbeIP}' ${USER}@${ProbeIP} <CMD>
+    
+
+# store ssh hopping command executed on echo
+remoteCMD=`ssh ${USER}@${jumpHost} ${USER}@${ProbeIP} <CMD>`
+echo $remoteCMD
