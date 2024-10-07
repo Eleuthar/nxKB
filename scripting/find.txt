@@ -1,5 +1,10 @@
+ls | grep NZ | xargs -I {} cp {} /tmp
+find . -iname "*foobar*" -exec cp -- "{}" ~/foo/bar \;
+  \\ copy files from the ls | find output
+
+
 # find | grep -o -P '^.+: \w+ image'
-// find images only
+  \\ find images only
 
  # find {{root_path}} -name '{{*.ext}}'
     // Find files by extension
