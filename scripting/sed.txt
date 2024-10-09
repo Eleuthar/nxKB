@@ -1,0 +1,3 @@
+sed -i -E 's/(<pattern>)/\U\1/g' <FILE>
+    \\ replace the pattern with uppercase `\U` or lowercase `\L`
+  
