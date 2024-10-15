@@ -1,0 +1,4 @@
+grep -E 'apple|banana|cherry' fruits.txt
+
+
+grep -e 'pattern1' -e 'pattern2' -e 'pattern3' filename
