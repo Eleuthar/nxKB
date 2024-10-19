@@ -1,0 +1,20 @@
+declare -A acronyms
+
+declare -A countries=( [ALB]=Albania [BHR]=Bahrain [CMR]=Cameroon [DNK]=Denmark [EGY]=Egypt )
+
+array-name[key]=Value
+
+acronyms[BGP]="Border Gateway Protocol"
+
+for key in "${!countries[@]}"; do echo $key; done
+
+echo "${!countries[@]}"
+
+if [ ${acronyms[EOF]+_} ]; then echo "Found"; else echo "Not found"; fi
+
+countries+=( [FJI]=Fiji )
+
+unset acronyms[EOF]
+
+unset acronyms
+	\\ remove entire array
