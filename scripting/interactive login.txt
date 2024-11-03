@@ -6,9 +6,8 @@
 bash --login
 	OR
 su - <uzr>
-
 	\\ execute first /etc/profile (system-wide env setting)
-  \\ individual uzr setting under ~/.bash_profile 
+  	\\ individual uzr setting under ~/.bash_profile 
 		\\ if bash_profile doesn't exist, execute ~/.bash_login  	
 		\\ if bash_login doesn't exist,execute ~/.profile 
 		
