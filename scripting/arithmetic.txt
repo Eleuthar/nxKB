@@ -1,0 +1,8 @@
+
+num1=55
+num2=77
+ 
+echo $(( num1 +-/*% num2 ))
+    OR
+echo $(expr num1 +-/% num2 )
+    \\ * must be escaped
