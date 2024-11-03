@@ -1,0 +1,40 @@
+
+ 
+read -p 'prompt_string :' <var>
+	// user input on same line; if no <var>, input is stored in $REPLY
+        
+    
+read -sp 'prompt_string :' <var>
+	// secure password user input stored in <var>
+    
+ 
+read -a names
+	// stores in array multiple input values separated by space
+	// echo "names : ${names[0]}, ${names[1]}"
+
+
+while read inputFile
+do
+    echo $inputFile
+done < [file]
+ 
+ 
+    OR
+ 
+    
+cat [file] | while read inputFile
+do
+    echo $inputFile
+done    
+    
+ 
+    OR
+    
+    
+while IFS=' ' read -r inputFile
+    // assign a blank space to IFS [internal field separator]
+    // -r prevents interpretation of escapes
+do
+    echo $inputFile
+done < [file]   
+    
