@@ -1,0 +1,11 @@
+bash -x <script>
+	 # debug verbose
+ 
+ 
+#!/bin/bash -x
+	# edit shebang to display code while running script    
+ 
+ 
+set -x WITH set +x
+	# activates & deactivates debugging from the point it is written    
+    
