@@ -1,0 +1,9 @@
+
+ 
+{ #<string> }
+    \\ lop off beginnging of string
+ 
+ 
+{ %<string> }
+    \\ lop off end of string
+	
