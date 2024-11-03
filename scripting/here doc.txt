@@ -1,0 +1,6 @@
+$ cat\more\less <<EOF >> [file]
+[one line string]
+[one line string]
+[one line string]
+EOF
+	\\ append\output from CLI; EOF can be replaced with any tag word or marker
