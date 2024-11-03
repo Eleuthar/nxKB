@@ -1,0 +1,33 @@
+
+**********************************
+|     INTERACTIVE LOGIN BASH     |
+**********************************
+
+bash --login
+	OR
+su - <uzr>
+
+	\\ execute first /etc/profile (system-wide env setting)
+  \\ individual uzr setting under ~/.bash_profile 
+		\\ if bash_profile doesn't exist, execute ~/.bash_login  	
+		\\ if bash_login doesn't exist,execute ~/.profile 
+		
+
+
+*************************************
+|     NON-INTERACTIVE NON-LOGIN     |
+*************************************
+	
+sh -c <cmd>
+  \\ if BASH_ENV doesn't exist, read ENV
+
+
+
+**************************************
+|     INTERACTIVE NON-LOGIN BASH     |
+**************************************
+
+su <uzr>
+	OR
+bash -c <cmd>
+	\\ execute ~/.bashrc when started
