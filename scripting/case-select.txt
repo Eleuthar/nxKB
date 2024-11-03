@@ -1,0 +1,51 @@
+
+******************
+|      CASE      |
+******************
+
+
+case $var in
+    [a-z] )
+        echo "$var" ;;
+
+    [A-Z] )
+        echo "$var" ;;
+
+    [0-9] )
+        echo "$var" ;;
+
+    ? )
+        echo "$var" ;;
+
+    * )
+        echo "other default" ;;
+esac
+    
+
+
+
+********************
+|      SELECT      |
+********************
+ 
+
+select NAME in name1 name2 name3
+do
+    case $NAME in
+    name1)
+        echo "name1 selected" ;;
+
+    name2)
+        echo "name2 selected" ;;
+
+    name3)
+        echo "name3 selected" ;;
+
+    *)
+        echo "non existing option"
+    esac
+done
+ 
+	\\ outputs a menu structure with the list elements in an ordered sequence, prompting for option selection
+    \\ usable with cases
+ 
