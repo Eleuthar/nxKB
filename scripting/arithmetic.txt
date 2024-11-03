@@ -1,8 +1,21 @@
 
 num1=55
 num2=77
- 
+
+
 echo $(( num1 +-/*% num2 ))
     OR
 echo $(expr num1 +-/% num2 )
     \\ * must be escaped
+
+ 
+echo "55.5 +-*% 5" | bc
+    OR
+echo "scale=2;55.5/4.5" | bc
+	// division must be used with scale, indicating the number of decimals after floating point
+
+
+echo "scale=2;sqrt($num1)" | bc -l
+    OR
+echo "scale=2;3^3" | bc -l
+	// -l loads the library containing high level math functions
