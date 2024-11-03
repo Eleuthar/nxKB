@@ -1,0 +1,36 @@
+
+     
+os=('ubuntu' 'mac' 'winbloz')
+ 
+ 
+os[2]='new_element'
+	\\ add new element at index
+    
+ 
+unset os[2]
+	\\ remove the index
+    
+ 
+echo "${os[@]}"
+    \\ print all index numbers
+    
+ 
+echo "${os[2]}"
+    \\ print individual element
+    
+ 
+echo "${!os[@]}"
+    \\ prints element index number
+    
+ 
+echo "${#os[@]}"
+    \\ print array length
+    
+ 
+stringVar=oneLengthyString
+ 
+echo "${stringVar[@]}"
+    \\ will print the entire string, treated as unique index
+    
+     
+
