@@ -1,0 +1,18 @@
+
+case $var in
+    [a-z] )
+        echo "$var" ;;
+
+    [A-Z] )
+        echo "$var" ;;
+
+    [0-9] )
+        echo "$var" ;;
+
+    ? )
+        echo "$var" ;;
+
+    * )
+        echo "other default" ;;
+esac
+    
