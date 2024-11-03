@@ -1,0 +1,75 @@
+var="value"
+export var
+	\\ good practice to create local shell env var, no one-liner
+	
+	
+declare -x var="value"
+	\\ export global shell env var
+	
+		
+( export var="value" )
+	\\ set env var to subshell
+	
+
+env var="value"
+	\\ set env variable value without setting in the current session
+	
+	
+env -i bash
+	\\ clear environment for a process
+	
+	
+builtin cat /etc/fstab
+	\\ force use a builtin command instead of alias
+	
+	
+set
+	\\ display all bash var+value & functions
+	
+	
+set value1 value2 value3 ($1 $2 $3)
+	\\ set values to positional parameter
+	
+$!
+	\\ PID of last child process
+	
+$$
+	\\ PID of running shell
+	
+$?
+	\\ last command return code
+
+set
+	\\ list all variables
+	
+
+env
+	\\ list all exported variables
+		
+	
+[qQ] || [0-9]
+	\\ regex range of value, only 1 selected
+	
+	
+{ztr1,ztr!}ng
+	\\ generate list of name with common stem, ex:ztr1ng, ztr!ng
+	
+	
+' '
+	\\ cancel meaning of all metachar except "\"
+	
+	
+" "
+	\\ cancel most of the special meaning char except: |, \, $var
+	
+	
+` ` OR $()
+	\\ execute command enclosed & return output; used only in between " "
+	
+	
+!!
+	\\ rerun last command
+	
+	
+exec <cmd>
+	\\ doesn't start a sub-process, rather replace the process \ current shell used to start it
