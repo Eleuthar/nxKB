@@ -15,3 +15,7 @@ grep -E "[[:space:]]" file.txt
 grep -P "\s" file.txt
     \\ find space
 
+
+echo "Hello    World" | cat -A
+    \\ show whitespace type: tabs as ^I, and newlines as $
+
