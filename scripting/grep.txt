@@ -1,10 +1,17 @@
 grep -E 'apple|banana|cherry' fruits.txt
-
 grep -e 'pattern1' -e 'pattern2' -e 'pattern3' filename
+
 
 grep -n "^" file.txt | grep "^602:"
     \\ by line number
     \\ alternative: $ sed -n '602p' file.txt
 
 
+grep -P "\t" file.txt
+    \\ find tab
+
+
+grep -E "[[:space:]]" file.txt
+grep -P "\s" file.txt
+    \\ find space
 
