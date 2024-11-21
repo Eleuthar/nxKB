@@ -1,4 +1,10 @@
 grep -E 'apple|banana|cherry' fruits.txt
 
-
 grep -e 'pattern1' -e 'pattern2' -e 'pattern3' filename
+
+grep -n "^" file.txt | grep "^602:"
+    \\ by line number
+    \\ alternative: $ sed -n '602p' file.txt
+
+
+
