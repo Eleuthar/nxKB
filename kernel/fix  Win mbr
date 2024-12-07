@@ -1,7 +1,8 @@
-sudo apt-get update; sudo apt-get install syslinux
+menuentry 'Windows 10' {
+    search --fs-uuid --no-floppy --set=root D464-A236
+    chainloader (${root})/EFI/Microsoft/Boot/bootmgfw.efi
+}
+    \\ /etc/grub.d/40_custom
 
-sudo fdisk -l
-    \\ get target device name
 
-sudo dd if=/usr/lib/syslinux/mbr.bin of=/dev/sda
-     \\ or /usr/lib/syslinux/mbr/mbr.bin
+grub-mkconfig -o /boot/grub.cfg
