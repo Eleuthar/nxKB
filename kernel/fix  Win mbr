@@ -1,0 +1,6 @@
+sudo apt-get update; sudo apt-get install syslinux
+
+sudo fdisk -l
+    \\ get target device name
+
+sudo dd if=/usr/lib/syslinux/mbr.bin of=/dev/sda
