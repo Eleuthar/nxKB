@@ -4,3 +4,4 @@ sudo fdisk -l
     \\ get target device name
 
 sudo dd if=/usr/lib/syslinux/mbr.bin of=/dev/sda
+     \\ or /usr/lib/syslinux/mbr/mbr.bin
