@@ -1,0 +1,5 @@
+CapsLock::LCtrl
+LCtrl::CapsLock
+!\::PrintScreen
+!End::PgUp
+!Home::PgDn
