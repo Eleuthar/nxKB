@@ -1,6 +1,6 @@
 !X::Send "{Volume_Up 1}"
 !Z::Send "{Volume_Down 1}"
-#\::Send("{PrintScreen}")
+#\::Send "{PrintScreen}"
 
 
 ; ~~~~~~~~~~~~~~~~~ RT68
