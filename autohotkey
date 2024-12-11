@@ -13,3 +13,6 @@
 ; ~~~~~~~~~~~~~~~~ Leopold
 Insert::Del
 Del::Insert
+#V::Send "{Media_Play_Pause}"
+#B::Send "{Media_Prev}"
+#N::Send "{Media_Next}"
