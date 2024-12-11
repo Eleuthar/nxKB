@@ -1,5 +1,15 @@
-CapsLock::LCtrl
-LCtrl::CapsLock
-!\::PrintScreen
-!End::PgUp
-!Home::PgDn
+!X::Send "{Volume_Up 1}"
+!Z::Send "{Volume_Down 1}"
+#\::Send("{PrintScreen}")
+
+
+; ~~~~~~~~~~~~~~~~~ RT68
+;CapsLock::LCtrl
+;LCtrl::CapsLock
+;!End::PgUp
+;!Home::PgDn
+
+
+; ~~~~~~~~~~~~~~~~ Leopold
+Insert::Del
+Del::Insert
