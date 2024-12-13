@@ -1,18 +1,19 @@
 !X::Send "{Volume_Up 1}"
 !Z::Send "{Volume_Down 1}"
+#X::Send "{Volume_Up 1}"
+#Z::Send "{Volume_Down 1}"
 #\::Send "{PrintScreen}"
+!V::Send "{Media_Play_Pause}"
+!B::Send "{Media_Prev}"
+!N::Send "{Media_Next}"
 
 
 ; ~~~~~~~~~~~~~~~~~ RT68
-;CapsLock::LCtrl
-;LCtrl::CapsLock
-;!End::PgUp
-;!Home::PgDn
-
+CapsLock::LCtrl
+LCtrl::CapsLock
+!End::PgUp
+!Home::PgDn
 
 ; ~~~~~~~~~~~~~~~~ Leopold
-Insert::Del
-Del::Insert
-#V::Send "{Media_Play_Pause}"
-#B::Send "{Media_Prev}"
-#N::Send "{Media_Next}"
+;Insert::Del
+;Del::Insert
