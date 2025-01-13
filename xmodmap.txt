@@ -1,3 +1,7 @@
+
+!reset
+setxkbmap -layout us
+
 ::::::::::::::
 .Xmodmap-epo
 ::::::::::::::
@@ -7,6 +11,7 @@
 ! pgdn 117
 keycode 112 = End
 keycode 117 = Insert
+
 ::::::::::::::
 .Xmodmap-fc
 ::::::::::::::
