@@ -8,11 +8,15 @@
 !N::Send "{Media_Next}"
 
 
-; ~~~~~~~~~~~~~~~~~ RT68
-CapsLock::LCtrl
+; ~~~~~~~~~~~~~~~~~ niz atom
+PgUp::Home
+PgDn::End
 LCtrl::CapsLock
-!End::PgUp
-!Home::PgDn
+CapsLock::LCtrl
+!Home::PgUp
+!End::PgDn
++Del::+Insert
+#\::Send "{PrintScreen}"
 
 ; ~~~~~~~~~~~~~~~~ Leopold
 ;Insert::Del
