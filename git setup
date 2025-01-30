@@ -5,6 +5,12 @@ $ find . \! -user foo -print
 $ rm -rf .git/objects/* .git/refs/heads/* .git/refs/remotes/* .git/refs/stash .git/refs/tags/*
 $ git pull
 
+\\ Overwrite Local main with Remote main
+$ git fetch origin
+$ git reset --hard origin/main
+$ git clean -fd
+
+
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 $ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
