@@ -18,12 +18,12 @@ sudp systemctl restart postgresql@14-main.service
 ~~~~~~~~~~~~~
 $ sudo su postgres
 $ psql <db>
-$ create database xxx;
+$ create database xxx_db;
 $ CREATE USER xxx_adm WITH ENCRYPTED PASSWORD '~~~~~~~'; 
 $ ALTER ROLE xxx_adm SET client_encoding TO 'utf8';
 $ ALTER ROLE xxx_adm SET default_transaction_isolation TO 'read committed';
 $ ALTER ROLE xxx_adm SET timezone TO 'UTC'; 
-$ ALTER DATABASE name OWNER TO new_owner;
+$ ALTER DATABASE name <xxx_db> TO new_owner;
 $ GRANT ALL PRIVILEGES ON DATABASE xxx_db TO xxx_adm;
 
 
