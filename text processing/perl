@@ -1,0 +1,2 @@
+perl -p -i -e "s/\r//g" <fname>
+  \\ replace \r aka ^M via cat -A
