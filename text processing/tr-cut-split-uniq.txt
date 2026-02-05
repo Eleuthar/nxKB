@@ -1,3 +1,7 @@
+# tr -d '^M' < inputfile
+	\\ remove return carriage from windows
+
+
 # split -l 5 /etc/passwd
 	\\ split file into 5 line files with default names: xaa, xab, xac, etc
 	
@@ -31,4 +35,5 @@
 	
 
 # tr ':' '' < /etc/passwd
+
 	\\ replace delimiter
